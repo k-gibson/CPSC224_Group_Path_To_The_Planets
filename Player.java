@@ -1,52 +1,64 @@
 /**
  * This Class holds player information as well
  *  as runs a player's turn for rolling for planets
- *  
+ *
  *  @author Parker Mooseker
  *  @version v1.0
- *  
+ *
  */
 import java.util.ArrayList;
 
 
 public class Player {
-	
+
 	private String playerName = "";
-	private ScoreCard playerCard;
+	private Scorecard playerCard;
 	private Die[] playerHand;
 	private static int numRolls = 7;
 	private ArrayList<Integer> travelList = new ArrayList<Integer>();
-	
+
 	/**
-	 * 
+	 *
 	 * @param name
 	 * @param card
 	 */
 	public void Player(String name) {
 		playerHand = new Die[7];
+    int turn = 1;
 		playerName = name;
 		playerCard = new ScoreCard();
-		
-	}
-	
-	public void roll(int numRolls) {
-	     int dieVal = 0;
-		 for (int i = 0 ; i < numRolls ; i++) {
-			 playerHand[i].rollDie(dieVal);
-			 dieVal = 0;
-		 }
-	 }
 
-	/**
-	 * 
-	 */
-	private void takeTurn() {
-		
-		roll(numRolls);
-		
 	}
-	
-	public void planetTravel() {
+
+   public void displayHand(){
+     for(int i = 0; i < this.playerHand.length(); i++){
+       System.out.println(this.playerHand[i] + " ")
+     }
+   }
+
+	private void takeTurn() {
+    for(int i = 0; i < playerHand.length(); i++)
+		  playerHand[i].roll();
+	}
+
+  public boolean score(){
+    boolean winnerFound = false;
+    this.playerCard.upperScoreCard();
+    this.playerCard.bonusScores();
+    if(this.playerCard.checkForWinner()){
+      System.out.println("YOU'VE WON!");
+      System.out.println("Congratulations " this.playerName);
+      winnerFound = true;
+    }
+    return winnerFound;
+  }
+
+  public void finalScore(){
+    this.playerCard.displayScorecard();
+  }
+
+	/*
+  public void planetTravel() {
 		for (int i = 1 ; i <= 7 ; i++) {
 			if (i == playerHand[i].getValueOfDie()) {
 				travelList.add(i , playerHand[i].getValueOfDie());
@@ -54,9 +66,11 @@ public class Player {
 			else
 				travelList.add(i, 0);
 		}
+    this.turn++;
 	}
-		
-	public void travelChoice(int travelOption) {
+
+
+  public void travelChoice(int travelOption) {
 		switch (travelOption) {
 			case 1 :
 				System.out.println("you may travel to Mercury");
@@ -70,7 +84,7 @@ public class Player {
 			case 4 :
 				System.out.println("you may travel to Mars");
 				break;
-			case 5 : 
+			case 5 :
 				System.out.println("you may travel to Jupiter");
 				break;
 			case 6 :
@@ -80,6 +94,6 @@ public class Player {
 				System.out.println("you may travel to Neptune");
 				break;
 		}
-		
-	}
+	}*/
+
 }

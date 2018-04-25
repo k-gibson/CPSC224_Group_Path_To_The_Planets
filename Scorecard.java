@@ -104,14 +104,13 @@ public class Scorecard {
       }
     }
 
-  /**
-    * Displays the array of dice on the screen
-    */
-  public void displayHand(){
-    for(int i = 0; i < numberOfDice; i++){
-      System.out.print(this.finalDice[i].getValue() + " ");
+    public boolean checkForWinner(){
+      for(int i = 0; i < numberOfDice; i++){
+        if(this.finalDice[i] == 0)
+          return false;
+      }
+      return true;
     }
-  }
 
 
   /**

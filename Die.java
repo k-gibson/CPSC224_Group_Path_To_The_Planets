@@ -1,60 +1,75 @@
-/**
-* This class stores the face value of a dice to use playing Yahtzee.
-* It contains the methods to roll the dice, get the value of the die
-* and set a new value to the die for sorting the array of dice
-* CPSC 224-01, Spring 2018
-* Programming Assignment #6
-* class Dice.java
-
-* @author Alana Dillinger
-
-* @version v1.0 3/23/2018
-*/
+/*
+ * This program creates an object die with a certain face value
+ * CPSC 224-02, Spring 2018
+ * Final Project
+ *
+ * @author Kathrine Gibson
+ *
+ * @version 
+ */
 
 import java.util.*;
 
-public class Die{
+public class Die implements Comparable<Die> {
 
-  public enum planet{MERCURY, VENUS, MARS, JUPITER, SATURN, URANUS, NEPTUNE};
-  private Random rand;
+  private int valueOfDie;
 
-  /**
-  * Die constructor stores an integer value and a variable rand to generate random numbers
-  * Die is used and called by Yahtzee
+  /*
+  * Die constructor sets a default value to the die
+  *
+  * @param none
+  * @returns none
+  * @throw none
   */
   public Die() {
-    planet = NULL;
-    rand = new Random();
+    valueOfDie = 0;
   }
 
-  /**
-  * "Rolls the die" or assigns a random integer between 1 and 6 to the die's value
+  /*
+  * Assigns an integer in the range of the user's
+  *  defined sides on each die
+  *
+  * @param int sidesOnDie represents the number of sides on each die
+  * @returns void
+  * @throw none
   */
-  public void roll(int numberOfSides) {
-    int value = rand.nextInt(numberOfSides);
-    if(value ==0) planet = MERCURY;
-    if(value ==1) planet = VENUS;
-    if(value ==2) planet = MARS;
-    if(value ==3) planet = JUPITER;
-    if(value ==4) planet = SATURN;
-    if(value ==5) planet = URANUS;
-    if(value ==6) planet = NEPTUNE;
-
+  public void rollDie(int dieVal) {
+	  
+	  dieVal = (int) (Math.random() * 7) + 1;
+	  changeFaceValue(dieVal);
   }
 
-  /**
-    * Retrieves the value of a certain die
-    * @return and integer of the value stored in that die
-    */
-  public int getValue() {
-    return (planet);
+  /*
+  * Manually changes the face value of a die
+  *
+  * @param int newValue is the value to be changed to
+  * @returns void
+  * @throw none
+  */
+  public void changeFaceValue(int newValue) {
+    valueOfDie = newValue;
   }
 
-  /**
-    * Changes a value of a specific die
-    * Used for sorting the dice in the array
-    */
-  public void set(int newPlanet){
-    this.planet = newPlanet;
+  /*
+  * Gives the face value of a die
+  *
+  * @param none
+  * @returns valueOfDie is the face value of the die
+  * @throw none
+  */
+  public int getValueOfDie() {
+    return valueOfDie;
+  }
+
+  /*
+  * Overrides Array.sot and compares the face value of two die
+  *
+  * @param a- a die to compare  to
+  * @returns the difference of to values of die
+  * @throw none
+  */
+  @Override
+  public int compareTo(Die a) {
+    return this.valueOfDie - a.valueOfDie;
   }
 }

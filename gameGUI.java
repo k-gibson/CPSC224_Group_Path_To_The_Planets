@@ -3,8 +3,6 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class gameGUI extends JFrame implements ActionListener{
-	
-	//private JFrame mainFrame = new JFrame();
 	private JPanel mainPanel = new JPanel(); 
 	
     private JButton rulesButton = new JButton("Rules");
@@ -14,55 +12,86 @@ public class gameGUI extends JFrame implements ActionListener{
     private static final int defaultHeight = 800;
 	
 	public gameGUI() {
-		//define settings used for every rules panel
-        setSize(defaultWidth, defaultHeight);
-        //this.setLayout(new GridBagLayout());
-        this.setLayout(new BorderLayout());
-        
-        mainPanel = createMainPanel();
+       setSize(defaultWidth, defaultHeight);
+
+       formatRulesButton();
+       formatPlayButton();
+       mainPanel = createMainPanel();
+            
+       add(mainPanel);     
+	}
+	
+	private void formatPlayButton() {
+		playButton.setOpaque(true);
+        playButton.setFont(new Font("Serif",Font.BOLD,30));
+        playButton.setBackground(new Color(67,39,59));
+        playButton.setForeground(Color.WHITE);
+        playButton.setFocusPainted(false);
+        playButton.setBorderPainted(false);
+        playButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         playButton.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	        	 mainPanel.setBackground(Color.green);
-	        	 Game spaceBalls = new Game(mainPanel);
+	        	 Game pathToThePlanets = new Game(mainPanel);
 	         }
 	      });
+	}
+	
+	private void formatRulesButton() {
+		rulesButton.setOpaque(true);
+        rulesButton.setFont(new Font("Serif",Font.BOLD,30));
+        rulesButton.setBackground(new Color(67,39,59));
+        rulesButton.setForeground(Color.WHITE);
+        rulesButton.setFocusPainted(false);
+        rulesButton.setBorderPainted(false);
+        rulesButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         rulesButton.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
-	           RulesFrame rules = new RulesFrame();
+	        	 RulesFrame rules = new RulesFrame();
+	        	 rules.setTitle("Path To The Planets Rules");
+	        	 rules.setVisible(true);
 	         }
 	      });
-        
-        mainPanel.add(rulesButton);
-  	  	mainPanel.add(playButton);
-  	  	
-  	  
-       add(mainPanel);
-        
 	}
+	
 	
 	private JPanel createMainPanel() {
 		JPanel returnPanel = new JPanel();
+		returnPanel.setLayout(new BoxLayout(returnPanel, BoxLayout.PAGE_AXIS));
 		returnPanel.setBackground(new java.awt.Color(40,23,35));
         returnPanel.setPreferredSize(new Dimension(defaultWidth,defaultHeight - 120));
         
-        JLabel greeting = new JLabel("SPACE BALLS");
+        JLabel welcome = new JLabel("Welcome To");
+        welcome.setFont(new Font("Verdana",1,35));
+        welcome.setForeground(Color.white);
+        welcome.setAlignmentX(Component.CENTER_ALIGNMENT);
+  	  	returnPanel.add(welcome, BorderLayout.NORTH);
+        
+        JLabel greeting = new JLabel("PATH TO THE PLANETS");
         greeting.setFont(new Font("Verdana",1,65));
         greeting.setForeground(Color.white);
+        greeting.setAlignmentX(Component.CENTER_ALIGNMENT);
   	  	returnPanel.add(greeting, BorderLayout.NORTH);
-        
+  	  	
+  	  	returnPanel.add(rulesButton);
+	  	returnPanel.add(playButton);
+	  	
+  	  
 		return returnPanel;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == rulesButton) {
-    		mainPanel.setBackground(Color.yellow);
-    		}
+			 RulesFrame rules = new RulesFrame();
+        	 rules.setTitle("Path To The Planets Rules");
+        	 rules.setVisible(true);
+    	}
     	else {
-    		mainPanel.setBackground(Color.red);
-    		
+    		mainPanel.setBackground(Color.green);
+       	 	Game pathToThePlanets = new Game(mainPanel);
     	}
 		
 	}

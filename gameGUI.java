@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.Box.*;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -23,7 +25,7 @@ public class gameGUI extends JFrame implements ActionListener{
 	
 	private void formatPlayButton() {
 		playButton.setOpaque(true);
-        playButton.setFont(new Font("Serif",Font.BOLD,30));
+        playButton.setFont(new Font("Krungthep",Font.BOLD,60));
         playButton.setBackground(new Color(67,39,59));
         playButton.setForeground(Color.WHITE);
         playButton.setFocusPainted(false);
@@ -32,20 +34,21 @@ public class gameGUI extends JFrame implements ActionListener{
         
         playButton.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
-	        	 mainPanel.setBackground(Color.green);
 	        	 Game pathToThePlanets = new Game(mainPanel);
 	         }
 	      });
 	}
 	
 	private void formatRulesButton() {
+		
 		rulesButton.setOpaque(true);
-        rulesButton.setFont(new Font("Serif",Font.BOLD,30));
+        rulesButton.setFont(new Font("Krungthep",Font.BOLD,60));
         rulesButton.setBackground(new Color(67,39,59));
         rulesButton.setForeground(Color.WHITE);
         rulesButton.setFocusPainted(false);
         rulesButton.setBorderPainted(false);
         rulesButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
         
         rulesButton.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
@@ -62,23 +65,36 @@ public class gameGUI extends JFrame implements ActionListener{
 		returnPanel.setLayout(new BoxLayout(returnPanel, BoxLayout.PAGE_AXIS));
 		returnPanel.setBackground(new java.awt.Color(40,23,35));
         returnPanel.setPreferredSize(new Dimension(defaultWidth,defaultHeight - 120));
+
+  	  	//define a blank space for formatting purposes
+        Filler space = new Filler(new Dimension(0, 80), new Dimension(0, 80), new Dimension(Short.MAX_VALUE, 80));
+        //make the space 'see through'
+  	    space.setOpaque(false);
+  	    returnPanel.add(space);
         
         JLabel welcome = new JLabel("Welcome To");
-        welcome.setFont(new Font("Verdana",1,35));
+        welcome.setFont(new Font("Krungthep",1,35));
         welcome.setForeground(Color.white);
         welcome.setAlignmentX(Component.CENTER_ALIGNMENT);
   	  	returnPanel.add(welcome, BorderLayout.NORTH);
         
         JLabel greeting = new JLabel("PATH TO THE PLANETS");
-        greeting.setFont(new Font("Verdana",1,65));
+        greeting.setFont(new Font("Krungthep",1,65));
         greeting.setForeground(Color.white);
         greeting.setAlignmentX(Component.CENTER_ALIGNMENT);
   	  	returnPanel.add(greeting, BorderLayout.NORTH);
   	  	
+  	    Filler blankSpace = new Filler(new Dimension(0, 80), new Dimension(0, 80), new Dimension(Short.MAX_VALUE, 80));
+  	    blankSpace.setOpaque(false);
+  	    returnPanel.add(blankSpace);
+  	    
+  	  	Filler newSpace = new Filler(new Dimension(0, 40), new Dimension(0, 40), new Dimension(Short.MAX_VALUE, 40));
+  	    newSpace.setOpaque(false);
+  	    
   	  	returnPanel.add(rulesButton);
+  	  	returnPanel.add(newSpace);
 	  	returnPanel.add(playButton);
 	  	
-  	  
 		return returnPanel;
 	}
 

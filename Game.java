@@ -13,6 +13,9 @@
 */
 
 import java.util.*;
+
+import javax.swing.JPanel;
+
 import java.io.*;
 
 public class Game extends Space{
@@ -27,7 +30,7 @@ public class Game extends Space{
   /**
   * Yahtzee constructor stores an array of dice used to play the game
   */
-  public Game(){
+  public Game(JPanel mainPanel){
     System.out.println("How many player are there? ");
     numberOfPlayers = input.nextInt();
     for(int i = 0; i < numberOfPlayers; i++){

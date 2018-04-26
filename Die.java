@@ -15,7 +15,7 @@ import java.util.*;
 
 public class Die{
 
-  public enum Planet{MERCURY, VENUS, MARS, JUPITER, SATURN, URANUS, NEPTUNE};
+  public static enum Planet{MERCURY, VENUS, MARS, JUPITER, SATURN, URANUS, NEPTUNE};
   public Planet planet;
   private Random rand;
 

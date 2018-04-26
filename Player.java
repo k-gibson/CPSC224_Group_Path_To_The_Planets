@@ -15,13 +15,13 @@ public class Player {
 	private Scorecard playerCard;
 	private Die[] playerHand;
 	private static int numRolls = 7;
-  private static int numDice = 7;
+	private static int numDice = 7;
 	private ArrayList<Integer> travelList = new ArrayList<Integer>();
 
 
-	public void Player(String name) {
+	public Player(String name) {
 		playerHand = new Die[7];
-    int turn = 1;
+		int turn = 1;
 		playerName = name;
 		playerCard = new Scorecard(playerHand);
 

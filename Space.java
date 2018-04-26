@@ -10,13 +10,18 @@
 */
 
 import java.util.*;
+
+import javax.swing.JPanel;
+
 import java.io.*;
 
 public class Space{
 
+	public static JPanel mainPanel;//PLACEHOLDER PANEL FIX!!!!!<------
+	
   // Creates and then lets the user play a game of yahtzee
   public static void main(String args[]) throws FileNotFoundException{
-    Game game = new Game();
+    Game game = new Game(mainPanel);
     game.playGame();
   }
 

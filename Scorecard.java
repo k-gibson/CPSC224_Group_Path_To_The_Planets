@@ -13,9 +13,11 @@
 * @version v1.0 3/23/2018
 */
 
-import java.util.*;
+import java.util.Scanner;
 
-public class Scorecard implements Die {
+
+
+public class Scorecard {
   Scanner input = new Scanner(System.in);
 
   public int numberOfSides = 7;
@@ -51,31 +53,31 @@ public class Scorecard implements Die {
   * Each line will only be displayed as an option if it has not yet been scored
   */
   public void upperScoreCard(){
-    if(dice[0].getValue()==MERCURY){
+    if(dice[0].getValue()== Die.Planet.MERCURY){
       upperCardScores[0] = 7;
       hasNotScored = false;
     }
-    if(dice[1].getValue()==VENUS){
+    if(dice[1].getValue()==Die.Planet.VENUS){
       upperCardScores[1] = 8;
       hasNotScored = false;
     }
-    if(dice[2].getValue()==MARS) {
+    if(dice[2].getValue()==Die.Planet.MARS) {
       upperCardScores[2] = 9;
       hasNotScored = false;
     }
-    if(dice[3].getValue()==JUPITER) {
+    if(dice[3].getValue()==Die.Planet.JUPITER) {
       upperCardScores[3] = 10;
       hasNotScored = false;
     }
-    if(dice[4].getValue()==SATURN) {
+    if(dice[4].getValue()==Die.Planet.SATURN) {
       upperCardScores[4] = 11;
       hasNotScored = false;
     }
-    if(dice[5].getValue()==URANUS) {
+    if(dice[5].getValue()==Die.Planet.URANUS) {
       upperCardScores[5] = 12;
       hasNotScored = false;
     }
-    if(dice[6].getValue().equals(NEPTUNE)) {
+    if(dice[6].getValue().equals(Die.Planet.NEPTUNE)) {
       upperCardScores[6] = 13;
       hasNotScored = false;
     }
@@ -109,6 +111,7 @@ public class Scorecard implements Die {
         else
           maxStraight = 0;
       }
+     return maxStraight; //<--- not sure
     }
 
     public boolean checkForWinner(){

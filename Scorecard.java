@@ -15,27 +15,34 @@
 
 import java.util.*;
 
-public class Scorecard {
+public class Scorecard implements Die {
   Scanner input = new Scanner(System.in);
 
   public int numberOfSides = 7;
   public int numberOfDice = 7;
+  int totalScore;
+  int smallStraight;
+  int largeStraight;
+  boolean hasNotScored;
+  int[] upperCardScores;
+  boolean[] hasBeenScored;
+  Die[] dice;
 
 
   /**
   * Scorecard constructor stores an array of dice that contains the same dice
   * that are stored in the dice array in the Yahtzee class
   */
-  public Scorecard(Die[] dice){
-    Die[] finalDice = dice;
+  public Scorecard(Die[] rolledDice){
+    dice = rolledDice;
     // set everything to zero since nothing has yet been scored
-    public int totalScore = 0;
-    int smallStraight = 0;
-    int largeStraight = 0;
-    boolean hasNotScored = true;
+    totalScore = 0;
+    smallStraight = 0;
+    largeStraight = 0;
+    hasNotScored = true;
 
-    int[] upperCardScores = new int[numberOfSides];
-    boolean[] hasBeenScored = new boolean[numberOfSides];
+    upperCardScores = new int[numberOfSides];
+    hasBeenScored = new boolean[numberOfSides];
   }
 
   /**
@@ -44,33 +51,33 @@ public class Scorecard {
   * Each line will only be displayed as an option if it has not yet been scored
   */
   public void upperScoreCard(){
-    if(this.finalDice[0].getValue()==MERCURY){
-      this.upperScoreCard[0] = 7;
-      this.hasNotScored = false;
+    if(dice[0].getValue()==MERCURY){
+      upperCardScores[0] = 7;
+      hasNotScored = false;
     }
-    if(this.finalDice[1.getValue()VENUS){
-      this.upperScoreCard[1] = 8;
-      this.hasNotScored = false;
+    if(dice[1].getValue()==VENUS){
+      upperCardScores[1] = 8;
+      hasNotScored = false;
     }
-    if(this.finalDice[2].getValue()==MARS) {
-      this.upperScoreCard[2] = 9;
-      this.hasNotScored = false;
+    if(dice[2].getValue()==MARS) {
+      upperCardScores[2] = 9;
+      hasNotScored = false;
     }
-    if(this.finalDice[3].getValue()==JUPITER) {
-      this.upperScoreCard[3] = 10;
-      this.hasNotScored = false;
+    if(dice[3].getValue()==JUPITER) {
+      upperCardScores[3] = 10;
+      hasNotScored = false;
     }
-    if(this.finalDice[4].getValue()==SATURN) {
-      this.upperScoreCard[4] = 11;
-      this.hasNotScored = false;
+    if(dice[4].getValue()==SATURN) {
+      upperCardScores[4] = 11;
+      hasNotScored = false;
     }
-    if(this.finalDice[5].getValue()==URANUS) {
-      this.upperScoreCard[5] = 12;
-      this.hasNotScored = false;
+    if(dice[5].getValue()==URANUS) {
+      upperCardScores[5] = 12;
+      hasNotScored = false;
     }
-    if(this.finalDice[6].getValue()==NEPTUNE) {
-      this.upperScoreCard[6] = 13;
-      this.hasNotScored = false;
+    if(dice[6].getValue().equals(NEPTUNE)) {
+      upperCardScores[6] = 13;
+      hasNotScored = false;
     }
   }
 
@@ -79,24 +86,24 @@ public class Scorecard {
   * The lower half contains points for straights, full houses, etc.
   * Each score will only be displayed if it has not yet been filled in on the scorecard
   */
-  private void bonusScores(){
-    if(this.smallStraight == 0){
+  public void bonusScores(){
+    if(smallStraight == 0){
       if(maxStraightFound() == 3){
-        this.smallStraight = 30;
+        smallStraight = 30;
       }
     }
 
-    if(this.largeStraight == 0){
-      if(maxSraightFound() == 5){
-        this.largeStraight = 30;
+    if(largeStraight == 0){
+      if(maxStraightFound() == 5){
+        largeStraight = 30;
       }
     }
   }
 
-    private int maxStrightFound(){
+    private int maxStraightFound(){
       int maxStraight = 0;
       for(int i = 0; i < numberOfDice; i++){
-        if(this.upperScoreCard[i] != 0){
+        if(upperCardScores[i] != 0){
           maxStraight++;
         }
         else
@@ -106,7 +113,7 @@ public class Scorecard {
 
     public boolean checkForWinner(){
       for(int i = 0; i < numberOfDice; i++){
-        if(this.finalDice[i] == 0)
+        if(dice[i].equals(0))
           return false;
       }
       return true;
@@ -122,36 +129,36 @@ public class Scorecard {
     System.out.println("    FINAL SCORECARD");
     System.out.println("--------------------------");
     // UPPER SCORECARD
-    System.out.println("MERCURY: " + this.finalDice[0]);
-    System.out.println("VENUS: " + this.finalDice[1]);
-    System.out.println("MARS: " + this.finalDice[2]);
-    System.out.println("JUPITER: " + this.finalDice[3]);
-    System.out.println("SATURN: " + this.finalDice[4]);
-    System.out.println("NEPTUNE: " + this.finalDice[5]);
-    System.out.println("URANUS: " + this.finalDice[6]);
+    System.out.println("MERCURY: " + dice[0]);
+    System.out.println("VENUS: " + dice[1]);
+    System.out.println("MARS: " + dice[2]);
+    System.out.println("JUPITER: " + dice[3]);
+    System.out.println("SATURN: " + dice[4]);
+    System.out.println("NEPTUNE: " + dice[5]);
+    System.out.println("URANUS: " + dice[6]);
 
     for(int i = 0; i < numberOfDice; i++){
-      this.totalScore += this.upperScoreCard[i];
+      totalScore += upperCardScores[i];
     }
     // LOWER SCORECARD
 
    // small straight line
-   if(this.smallStraight > 0){
-     System.out.println("Small Straight: " + this.smallStraight);
-     this.totalScore += this.smallStraight;
+   if(smallStraight > 0){
+     System.out.println("Small Straight: " + smallStraight);
+     totalScore += smallStraight;
    }else{
      System.out.println("Small Straight: 0");
    }
 
    // large straight line
-   if(this.largeStraight > 0){
-     System.out.println("Large Straight: " + this.largeStraight);
-     this.totalScore += this.largeStraight;
+   if(largeStraight > 0){
+     System.out.println("Large Straight: " + largeStraight);
+     totalScore += largeStraight;
    }else{
      System.out.println("Large Straight: 0");
    }
 
   // Display total score
-  System.out.println("TOTAL SCORE: " + this.totalScore);
+  System.out.println("TOTAL SCORE: " + totalScore);
   }
 }

@@ -15,7 +15,8 @@ import java.util.*;
 
 public class Die{
 
-  public enum planet{MERCURY, VENUS, MARS, JUPITER, SATURN, URANUS, NEPTUNE};
+  public enum Planet{MERCURY, VENUS, MARS, JUPITER, SATURN, URANUS, NEPTUNE};
+  public Planet planet;
   private Random rand;
 
   /**
@@ -23,7 +24,7 @@ public class Die{
   * Die is used and called by Yahtzee
   */
   public Die() {
-    planet = NULL;
+    Planet planet;
     rand = new Random();
   }
 
@@ -32,28 +33,20 @@ public class Die{
   */
   public void roll(int numberOfSides) {
     int value = rand.nextInt(numberOfSides);
-    if(value ==0) planet = MERCURY;
-    if(value ==1) planet = VENUS;
-    if(value ==2) planet = MARS;
-    if(value ==3) planet = JUPITER;
-    if(value ==4) planet = SATURN;
-    if(value ==5) planet = URANUS;
-    if(value ==6) planet = NEPTUNE;
+    if(value ==0) planet = Planet.MERCURY;
+    if(value ==1) planet = Planet.VENUS;
+    if(value ==2) planet = Planet.MARS;
+    if(value ==3) planet = Planet.JUPITER;
+    if(value ==4) planet = Planet.SATURN;
+    if(value ==5) planet = Planet.URANUS;
+    if(value ==6) planet = Planet.NEPTUNE;
   }
 
   /**
     * Retrieves the value of a certain die
     * @return and integer of the value stored in that die
     */
-  public int getValue() {
-    return (planet);
-  }
-
-  /**
-    * Changes a value of a specific die
-    * Used for sorting the dice in the array
-    */
-  public void set(int newPlanet){
-    this.planet = newPlanet;
+  public Planet getValue() {
+    return (this.planet);
   }
 }

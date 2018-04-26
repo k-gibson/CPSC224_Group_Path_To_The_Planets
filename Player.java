@@ -15,30 +15,27 @@ public class Player {
 	private Scorecard playerCard;
 	private Die[] playerHand;
 	private static int numRolls = 7;
+  private static int numDice = 7;
 	private ArrayList<Integer> travelList = new ArrayList<Integer>();
 
-	/**
-	 *
-	 * @param name
-	 * @param card
-	 */
+
 	public void Player(String name) {
 		playerHand = new Die[7];
     int turn = 1;
 		playerName = name;
-		playerCard = new ScoreCard();
+		playerCard = new Scorecard(playerHand);
 
 	}
 
    public void displayHand(){
-     for(int i = 0; i < this.playerHand.length(); i++){
-       System.out.println(this.playerHand[i] + " ")
+     for(int i = 0; i < numDice; i++){
+       System.out.println(this.playerHand[i] + " ");
      }
    }
 
-	private void takeTurn() {
-    for(int i = 0; i < playerHand.length(); i++)
-		  playerHand[i].roll();
+	public void takeTurn() {
+    for(int i = 0; i < numDice; i++)
+		  playerHand[i].roll(numDice);
 	}
 
   public boolean score(){
@@ -47,7 +44,7 @@ public class Player {
     this.playerCard.bonusScores();
     if(this.playerCard.checkForWinner()){
       System.out.println("YOU'VE WON!");
-      System.out.println("Congratulations " this.playerName);
+      System.out.println("Congratulations " + this.playerName);
       winnerFound = true;
     }
     return winnerFound;

@@ -29,7 +29,7 @@ public class Game extends Space{
   */
   public Game(){
     System.out.println("How many player are there? ");
-    numberOfPlayers = input.next();
+    numberOfPlayers = input.nextInt();
     for(int i = 0; i < numberOfPlayers; i++){
       System.out.print("Player Name: ");
       String name = input.next();
@@ -72,5 +72,6 @@ public class Game extends Space{
     //hand need to be sorted to check for straights
     for(int i = 0; i < numberOfPlayers; i++){
       players[i].finalScore();
+    }
   }
 }

@@ -6,21 +6,19 @@ public class DrawStarShape extends JPanel {
 	
 	public DrawStarShape() {
 	    //setMinimumSize(new Dimension(500,500));
-		Dimension size = new Dimension(210, 290);
+		Dimension size = new Dimension(220, 290);
 	    setMaximumSize(size);
 	    setLayout(null);
 	    setOpaque(false);
 	}
-	    public void paintComponent(Graphics gr)
+	    public void paintComponent(Graphics graphic)
 	    {
-	        
-	        Graphics2D g = (Graphics2D) gr;
-	      
+	        Graphics2D drawing = (Graphics2D) graphic;
 
-	        g.setPaint(Color.yellow);
-	        g.fill(star(90, 150, 40));
-	        Graphics gre = (Graphics) g;
-	        super.paintComponent(gre);
+	        drawing.setPaint(Color.yellow);
+	        drawing.fill(star(90, 150, 40));
+	        Graphics finalGraphic = (Graphics) drawing;
+	        super.paintComponent(finalGraphic);
 	    }
 
 	    private Shape star(double centerX, double centerY,double radius)

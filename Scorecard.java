@@ -40,7 +40,6 @@ public class Scorecard {
     smallStraight = 0;
     largeStraight = 0;
     hasNotScored = true;
-
     upperCardScores = new int[numberOfSides];
     scored = new boolean[numberOfSides];
   }
@@ -51,6 +50,8 @@ public class Scorecard {
   * Each line will only be displayed as an option if it has not yet been scored
   */
   public void upperScoreCard(){
+	// No GUI needed in this function... I think  
+	  
     // reset boolean array to false to check what has been scored this turn
     for (int i = 0; i < numberOfDice; i++){
       scored[i] = false;
@@ -98,6 +99,7 @@ public class Scorecard {
   * Each score will only be displayed if it has not yet been filled in on the scorecard
   */
   public void bonusScores(){
+	// No GUI
     if(smallStraight == 0){
       if(maxStraightFound() == 2){
         smallStraight = 30;
@@ -112,6 +114,7 @@ public class Scorecard {
   }
 
     private int maxStraightFound(){
+    	// No GUI
       int maxStraight = 0;
       for(int i = 0; i < numberOfDice; i++){
         if(scored[i]){
@@ -124,6 +127,7 @@ public class Scorecard {
     }
 
     public boolean checkForWinner(){
+      // No GUI
       for(int i = 0; i < numberOfDice; i++){
         if(upperCardScores[i]==0)
           return false;
@@ -137,6 +141,9 @@ public class Scorecard {
     * Adds up all of the points on the card and displays the total at the bottom
     */
   public void displayScorecard(Player player){
+	// We can replace all of this with a call to a Scorecard panel
+	// except the loop to count the total
+	// Pass the array UpperCardScores, smallStraight, largeStraight, and totalScore to the Scorecard panel
 
     System.out.println("    FINAL SCORECARD " + player.playerName);
     System.out.println("--------------------------");

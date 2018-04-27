@@ -12,7 +12,7 @@
 import java.util.*;
 
 public class Die{
-
+  // We don't need any GUI in this class
   public static enum Planet{MERCURY, VENUS, MARS, JUPITER, SATURN, URANUS, NEPTUNE};
   public Planet planet;
   private Random rand;

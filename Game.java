@@ -29,12 +29,20 @@ public class Game extends Space{
   * Yahtzee constructor stores an array of dice used to play the game
   */
   public Game(){
-    System.out.println("How many player are there? ");
-    numberOfPlayers = input.nextInt();
+	  // Call when start game button is pressed
+	gameGUI newGame = new gameGUI();
+    //System.out.println("How many player are there? ");
+    // Call get number of players panel class which returns numberOfPlayers
+    NumberOfPlayers playerPanel = new NumberOfPlayers();
+    numberOfPlayers = playerPanel.getPlayerNumber(); //input.nextInt(); //input.nextInt becomes call to getPlayer panel class
     players = new Player[numberOfPlayers];
     for(int i = 0; i < numberOfPlayers; i++){
-      System.out.print("Player Name: ");
-      String name = input.next();
+      //create new panel to input the users name panel returns user name
+      //System.out.print("Player Name: ");
+    	//*************** need function in NumberOfPlayers to get player names
+    	// return the array of players? Or just one player
+    	
+      String name = input.next(); // input.next() is replaced with call to getPlayerName panel
       players[i] = new Player(name);
     }
   }
@@ -48,6 +56,9 @@ public class Game extends Space{
     while (numberOfTurns <= 7 && !winnerFound)
     {
       for(int i = 0; i < numberOfPlayers; i++){
+    	RollPanel newRoll = new RollPanel(players[i]);
+    	// after the roll panel we need a panel to display the dice.
+    	// this should be in the takeTurn function in the Player class
         players[i].takeTurn(players[i]);
         winnerFound = players[i].score(players[i]);
         if(winnerFound){
@@ -55,7 +66,9 @@ public class Game extends Space{
         }
       }
       if(winnerFound) break;
-      System.out.println("-------------------------TURN " + numberOfTurns + "------------------------");
+      // call panel to display the turn number.
+      TurnPanel turnPanel = new TurnPanel(numberOfTurns);
+      //System.out.println("-------------------------TURN " + numberOfTurns + "------------------------");
       numberOfTurns++;
     }
     endGame();

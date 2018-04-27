@@ -5,9 +5,7 @@
 * CPSC 224-01, Spring 2018
 * Programming Assignment #6
 * class Dice.java
-
 * @author Alana Dillinger
-
 * @version v1.0 3/23/2018
 */
 

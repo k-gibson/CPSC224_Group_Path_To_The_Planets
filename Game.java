@@ -6,9 +6,7 @@
 * CPSC 224-01, Spring 2018
 * Programming Assignment #6
 * class Yahtzee.java
-
 * @author Alana Dillinger
-
 * @version v1.0 3/23/2018
 */
 
@@ -30,9 +28,10 @@ public class Game extends Space{
   /**
   * Yahtzee constructor stores an array of dice used to play the game
   */
-  public Game(JPanel mainPanel){
+  public Game(){
     System.out.println("How many player are there? ");
     numberOfPlayers = input.nextInt();
+    players = new Player[numberOfPlayers];
     for(int i = 0; i < numberOfPlayers; i++){
       System.out.print("Player Name: ");
       String name = input.next();
@@ -49,23 +48,17 @@ public class Game extends Space{
     while (numberOfTurns <= 7 && !winnerFound)
     {
       for(int i = 0; i < numberOfPlayers; i++){
-        players[i].takeTurn();
-        winnerFound = players[i].score();
+        players[i].takeTurn(players[i]);
+        winnerFound = players[i].score(players[i]);
+        if(winnerFound){
+          break;
+        }
       }
+      if(winnerFound) break;
+      System.out.println("-------------------------TURN " + numberOfTurns + "------------------------");
       numberOfTurns++;
     }
     endGame();
-  }
-
-  /**
-    * Simulates a turn of the game Yahtzee
-    * Rolls the dice three times allowing users to select which dice they would
-    * like to keep and which they would like to reroll and scores the game
-    */
-  private void takeTurn(){
-    for(int i = 0; i < numberOfPlayers; i++){
-      players[i].takeTurn();
-    }
   }
 
     /**
@@ -74,7 +67,7 @@ public class Game extends Space{
   private void endGame(){
     //hand need to be sorted to check for straights
     for(int i = 0; i < numberOfPlayers; i++){
-      players[i].finalScore();
+      players[i].finalScore(players[i]);
     }
   }
 }

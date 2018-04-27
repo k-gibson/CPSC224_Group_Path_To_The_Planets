@@ -9,88 +9,59 @@
 import java.util.ArrayList;
 
 
-public class Player {
+public class Player{
 
-	private String playerName = "";
-	private Scorecard playerCard;
-	private Die[] playerHand;
+	public String playerName = "";
 	private static int numRolls = 7;
 	private static int numDice = 7;
-	private ArrayList<Integer> travelList = new ArrayList<Integer>();
+	private Scorecard playerCard;
+	private Die[] playerHand;
 
 
 	public Player(String name) {
-		playerHand = new Die[7];
+		playerHand = new Die[numDice];
 		int turn = 1;
 		playerName = name;
 		playerCard = new Scorecard(playerHand);
 
 	}
 
-   public void displayHand(){
-     for(int i = 0; i < numDice; i++){
-       System.out.println(this.playerHand[i] + " ");
-     }
-   }
-
-	public void takeTurn() {
-    for(int i = 0; i < numDice; i++)
-		  playerHand[i].roll(numDice);
+	public void takeTurn(Player player){
+		for(int i = 0; i < numDice; i++){
+			this.playerHand[i] = new Die();
+		}
+		for(int i = 0; i < numDice; i++){
+			this.playerHand[i].roll(7);
+		}
+			displayHand(player);
+			System.out.println("");
 	}
 
-  public boolean score(){
+	private void displayHand(Player player){
+		System.out.println(player.playerName + " rolled:");
+
+		System.out.println("Mercury die: " + this.playerHand[0].getValue());
+		System.out.println("Venus die: " + this.playerHand[1].getValue());
+		System.out.println("Mars die: " + this.playerHand[2].getValue());
+		System.out.println("Jupiter die: " + this.playerHand[3].getValue());
+		System.out.println("Saturn die: " + this.playerHand[4].getValue());
+		System.out.println("Uranus die: " + this.playerHand[5].getValue());
+		System.out.println("Neptune die: " + this.playerHand[6].getValue());
+	}
+
+  public boolean score(Player player){
     boolean winnerFound = false;
-    this.playerCard.upperScoreCard();
-    this.playerCard.bonusScores();
-    if(this.playerCard.checkForWinner()){
+    player.playerCard.upperScoreCard();
+    player.playerCard.bonusScores();
+    if(player.playerCard.checkForWinner()){
       System.out.println("YOU'VE WON!");
-      System.out.println("Congratulations " + this.playerName);
+      System.out.println("Congratulations " + player.playerName);
       winnerFound = true;
     }
     return winnerFound;
   }
 
-  public void finalScore(){
-    this.playerCard.displayScorecard();
+  public void finalScore(Player player){
+    player.playerCard.displayScorecard(player);
   }
-
-	/*
-  public void planetTravel() {
-		for (int i = 1 ; i <= 7 ; i++) {
-			if (i == playerHand[i].getValueOfDie()) {
-				travelList.add(i , playerHand[i].getValueOfDie());
-			}
-			else
-				travelList.add(i, 0);
-		}
-    this.turn++;
-	}
-
-
-  public void travelChoice(int travelOption) {
-		switch (travelOption) {
-			case 1 :
-				System.out.println("you may travel to Mercury");
-				break;
-			case 2 :
-				System.out.println("you may travel to Venus");
-				break;
-			case 3 :
-				System.out.println("you may travel to Earth");
-				break;
-			case 4 :
-				System.out.println("you may travel to Mars");
-				break;
-			case 5 :
-				System.out.println("you may travel to Jupiter");
-				break;
-			case 6 :
-				System.out.println("you may travel to Saturn");
-				break;
-			case 7 :
-				System.out.println("you may travel to Neptune");
-				break;
-		}
-	}*/
-
 }

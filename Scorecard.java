@@ -7,9 +7,7 @@
 * CPSC 224-01, Spring 2018
 * Programming Assignment #6
 * class Scorecard.java
-
 * @author Alana Dillinger
-
 * @version v1.0 3/23/2018
 */
 
@@ -27,7 +25,7 @@ public class Scorecard {
   int largeStraight;
   boolean hasNotScored;
   int[] upperCardScores;
-  boolean[] hasBeenScored;
+  boolean[] scored;
   Die[] dice;
 
 
@@ -44,7 +42,7 @@ public class Scorecard {
     hasNotScored = true;
 
     upperCardScores = new int[numberOfSides];
-    hasBeenScored = new boolean[numberOfSides];
+    scored = new boolean[numberOfSides];
   }
 
   /**
@@ -53,32 +51,43 @@ public class Scorecard {
   * Each line will only be displayed as an option if it has not yet been scored
   */
   public void upperScoreCard(){
+    // reset boolean array to false to check what has been scored this turn
+    for (int i = 0; i < numberOfDice; i++){
+      scored[i] = false;
+    }
     if(dice[0].getValue()== Die.Planet.MERCURY){
       upperCardScores[0] = 7;
+      scored[0] = true;
       hasNotScored = false;
     }
     if(dice[1].getValue()==Die.Planet.VENUS){
       upperCardScores[1] = 8;
+      scored[0] = true;
       hasNotScored = false;
     }
     if(dice[2].getValue()==Die.Planet.MARS) {
       upperCardScores[2] = 9;
+      scored[0] = true;
       hasNotScored = false;
     }
     if(dice[3].getValue()==Die.Planet.JUPITER) {
       upperCardScores[3] = 10;
+      scored[0] = true;
       hasNotScored = false;
     }
     if(dice[4].getValue()==Die.Planet.SATURN) {
       upperCardScores[4] = 11;
+      scored[0] = true;
       hasNotScored = false;
     }
     if(dice[5].getValue()==Die.Planet.URANUS) {
       upperCardScores[5] = 12;
+      scored[0] = true;
       hasNotScored = false;
     }
     if(dice[6].getValue().equals(Die.Planet.NEPTUNE)) {
       upperCardScores[6] = 13;
+      scored[0] = true;
       hasNotScored = false;
     }
   }
@@ -90,13 +99,13 @@ public class Scorecard {
   */
   public void bonusScores(){
     if(smallStraight == 0){
-      if(maxStraightFound() == 3){
+      if(maxStraightFound() == 2){
         smallStraight = 30;
       }
     }
 
     if(largeStraight == 0){
-      if(maxStraightFound() == 5){
+      if(maxStraightFound() == 3){
         largeStraight = 30;
       }
     }
@@ -105,7 +114,7 @@ public class Scorecard {
     private int maxStraightFound(){
       int maxStraight = 0;
       for(int i = 0; i < numberOfDice; i++){
-        if(upperCardScores[i] != 0){
+        if(scored[i]){
           maxStraight++;
         }
         else
@@ -116,7 +125,7 @@ public class Scorecard {
 
     public boolean checkForWinner(){
       for(int i = 0; i < numberOfDice; i++){
-        if(dice[i].equals(0))
+        if(upperCardScores[i]==0)
           return false;
       }
       return true;
@@ -127,18 +136,18 @@ public class Scorecard {
     * Displays the final score card once the game has finished
     * Adds up all of the points on the card and displays the total at the bottom
     */
-  public void displayScorecard(){
+  public void displayScorecard(Player player){
 
-    System.out.println("    FINAL SCORECARD");
+    System.out.println("    FINAL SCORECARD " + player.playerName);
     System.out.println("--------------------------");
     // UPPER SCORECARD
-    System.out.println("MERCURY: " + dice[0]);
-    System.out.println("VENUS: " + dice[1]);
-    System.out.println("MARS: " + dice[2]);
-    System.out.println("JUPITER: " + dice[3]);
-    System.out.println("SATURN: " + dice[4]);
-    System.out.println("NEPTUNE: " + dice[5]);
-    System.out.println("URANUS: " + dice[6]);
+    System.out.println("MERCURY: " + upperCardScores[0]);
+    System.out.println("VENUS: " + upperCardScores[1]);
+    System.out.println("MARS: " + upperCardScores[2]);
+    System.out.println("JUPITER: " + upperCardScores[3]);
+    System.out.println("SATURN: " + upperCardScores[4]);
+    System.out.println("NEPTUNE: " + upperCardScores[5]);
+    System.out.println("URANUS: " + upperCardScores[6]);
 
     for(int i = 0; i < numberOfDice; i++){
       totalScore += upperCardScores[i];

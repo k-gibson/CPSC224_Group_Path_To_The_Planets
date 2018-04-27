@@ -36,41 +36,6 @@ public class RulesFrame extends JFrame implements ActionListener{
         rulesPanel.add(rulesPanel0);
         add(rulesPanel); 
     }
-
-    
-    public void actionPerformed(ActionEvent e)
-    {
-        
-    	if(e.getSource() == nextButton) {
-    		rulesPanel.remove(getCurrentPanel());
-    		rulesPanel.revalidate();
-    		rulesPanel.repaint();
-    		rulesPanel.add(getNextPanel());
-    		rulesIndex++;
-    		Component otherSource = previousButton;
-			otherSource.setVisible(true);
-    		if (rulesIndex > 3) {
-    			Component source = nextButton;
-    			source.setVisible(false); 
-    		}
-    	}
-    	else if(e.getSource() == previousButton)  {
-    		rulesPanel.remove(getCurrentPanel());
-    		rulesPanel.revalidate();
-    		rulesPanel.repaint();
-    		rulesPanel.add(getPreviousPanel());
-    		rulesIndex--; 
-			Component otherSource = nextButton;
-			otherSource.setVisible(true);
-    		if (rulesIndex <= 0) {
-    			Component source = previousButton;
-    			source.setVisible(false); 
-    		}
-    	}
-    	else {
-    		this.setVisible(false);
-    	}
-    }
     
     private JPanel getCurrentPanel() {
     	JPanel currentPanel = rulesArray[rulesIndex];
@@ -133,6 +98,40 @@ public class RulesFrame extends JFrame implements ActionListener{
         previousButton.setFocusPainted(false);
         previousButton.setBorderPainted(false);
         previousButton.addActionListener(this);
+    }
+    
+    public void actionPerformed(ActionEvent e)
+    {
+        
+    	if(e.getSource() == nextButton) {
+    		rulesPanel.remove(getCurrentPanel());
+    		rulesPanel.revalidate();
+    		rulesPanel.repaint();
+    		rulesPanel.add(getNextPanel());
+    		rulesIndex++;
+    		Component otherSource = previousButton;
+			otherSource.setVisible(true);
+    		if (rulesIndex > 3) {
+    			Component source = nextButton;
+    			source.setVisible(false); 
+    		}
+    	}
+    	else if(e.getSource() == previousButton)  {
+    		rulesPanel.remove(getCurrentPanel());
+    		rulesPanel.revalidate();
+    		rulesPanel.repaint();
+    		rulesPanel.add(getPreviousPanel());
+    		rulesIndex--; 
+			Component otherSource = nextButton;
+			otherSource.setVisible(true);
+    		if (rulesIndex <= 0) {
+    			Component source = previousButton;
+    			source.setVisible(false); 
+    		}
+    	}
+    	else {
+    		this.setVisible(false);
+    	}
     }
 
     private JPanel createRulesPanel() {

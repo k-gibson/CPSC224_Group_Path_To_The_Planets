@@ -8,7 +8,7 @@ import java.io.IOException;
 public class gameGUI extends JFrame implements ActionListener{
 	private JPanel mainPanel = new JPanel();
 	private SpaceImage spaceImage;
-	JLayeredPane finalPanel = getLayeredPane();
+	private JLayeredPane finalPanel = getLayeredPane();
 	
     private JButton rulesButton = new JButton("Rules");
     private JButton playButton = new JButton("Play");
@@ -36,7 +36,7 @@ public class gameGUI extends JFrame implements ActionListener{
         
         playButton.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
-	        	 Game pathToThePlanets = new Game(mainPanel);
+	        	 Game raceThroughSpace = new Game();
 	         }
 	      });
 	}
@@ -55,15 +55,13 @@ public class gameGUI extends JFrame implements ActionListener{
         rulesButton.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	        	 RulesFrame rules = new RulesFrame();
-	        	 rules.setTitle("Path To The Planets Rules");
+	        	 rules.setTitle("Race Through Space Rules");
 	        	 rules.setVisible(true);
 	         }
 	      });
 	}
 	
 	private void createMainPanel() {
-		JPanel mainPanel = new JPanel();
-		
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 		mainPanel.setBackground(new java.awt.Color(40,23,35));
         mainPanel.setPreferredSize(new Dimension(defaultWidth,defaultHeight - 120));
@@ -80,7 +78,7 @@ public class gameGUI extends JFrame implements ActionListener{
         welcome.setAlignmentX(Component.CENTER_ALIGNMENT);
   	  	mainPanel.add(welcome, BorderLayout.NORTH);
   	  	   
-        JLabel greeting = new JLabel("PATH TO THE PLANETS");
+        JLabel greeting = new JLabel("RACE THROUGH SPACE");
         greeting.setFont(new Font("Krungthep",1,85));
         greeting.setForeground(Color.white);
         greeting.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -124,12 +122,12 @@ public class gameGUI extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == rulesButton) {
 			 RulesFrame rules = new RulesFrame();
-        	 rules.setTitle("Path To The Planets Rules");
+        	 rules.setTitle("Race Through Space Rules");
         	 rules.setVisible(true);
     	}
     	else {
     		mainPanel.setBackground(Color.green);
-       	 	Game pathToThePlanets = new Game(mainPanel);
+       	 	Game raceThroughSpace = new Game();
     	}
 		
 	}

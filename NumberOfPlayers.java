@@ -26,11 +26,6 @@ public class NumberOfPlayers extends JFrame implements ActionListener{
 		createMainPanel();
 	}
 	
-	//to see if a user has inputed the number of players
-	public boolean getHasUserInput() {
-		return hasUserInput;
-	}
-	
 	public int getPlayerNumber() {
 		return numberOfPlayers;
 	}
@@ -92,6 +87,8 @@ public class NumberOfPlayers extends JFrame implements ActionListener{
 	 public void actionPerformed(ActionEvent e) {
        	 String userInput = input.getText();
        	 numberOfPlayers = Integer.parseInt(userInput);
+       	 
+       	//numberOfPlayersListener.update(numberOfPlayers);
        	hasUserInput = true;
        	 if(numberOfPlayers > 7) {
        		 JLabel error = new JLabel("Sorry, you can only have up to 7 players");
@@ -105,67 +102,10 @@ public class NumberOfPlayers extends JFrame implements ActionListener{
        	 
        	 System.out.println(numberOfPlayers);
        	 if (hasUserInput) {
-       		 finalPanel.remove(finalPanel.getIndexOf(mainPanel));
-       		 finalPanel.repaint();
-       		 createBackgroundImage();
-       	 
-       		 JPanel newNames = makeNewNamesPanel();
-       		 newNames.setOpaque(false);
-       		 finalPanel.add(newNames, JLayeredPane.PALETTE_LAYER);
-       		 finalPanel.repaint();
+       		 this.setVisible(false);
        	 }
      }
 	 
-	 private JPanel makeNewNamesPanel() {
-		 JPanel returnPanel = new JPanel();
-		 	returnPanel.setLayout(new BoxLayout(returnPanel, BoxLayout.PAGE_AXIS));
-			returnPanel.setBackground(new java.awt.Color(40,23,35));
-	        returnPanel.setPreferredSize(new Dimension(defaultWidth,defaultHeight - 120));
-	        
-	     	//define a blank space for formatting purposes
-	        Filler space = new Filler(new Dimension(0, 80), new Dimension(0, 80), new Dimension(Short.MAX_VALUE, 180));
-	        //make the space 'see through'
-	  	    space.setOpaque(false);
-	  	    returnPanel.add(space);
-	        
-	        JLabel getNumber = new JLabel("Please Enter The Name of Each Player:");
-	        getNumber.setFont(new Font("Krungthep",1,35));
-	  	  	Font font = getNumber.getFont();
-	  	  	Map attributes = font.getAttributes();
-	  	  	attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-	  	  	getNumber.setFont(font.deriveFont(attributes));
-	        getNumber.setForeground(Color.white);
-	        getNumber.setAlignmentX(Component.CENTER_ALIGNMENT);
-	  	  	returnPanel.add(getNumber);
-	  	  	
-	  	  	Filler newSpace = new Filler(new Dimension(0, 80), new Dimension(0, 80), new Dimension(Short.MAX_VALUE, 20));
-		    newSpace.setOpaque(false);
-		    returnPanel.add(newSpace);
-		    
-		    JPanel namePanel = addNamePanel();
-		    returnPanel.add(namePanel);
-	  	  
-	  	    Filler blankSpace = new Filler(new Dimension(0, 80), new Dimension(0, 80), new Dimension(Short.MAX_VALUE, 80));
-	  	    blankSpace.setOpaque(false);
-	  	    returnPanel.add(blankSpace);
-
-	      	returnPanel.setBounds(0, 0, defaultWidth, defaultHeight);
-	      	return returnPanel;
-		}
-		
-		private JPanel addNamePanel() {
-			JPanel namePanel = new JPanel();
-			namePanel.setLayout(new GridLayout(2, numberOfPlayers));
-			
-			for(int n = 0; n < numberOfPlayers; n++) {
-				JTextField nameInput = new JTextField(2);
-				nameInput.setMaximumSize(new Dimension(50, 30));
-				namePanel.add(nameInput);
-			}
-			
-			return namePanel;
-		} 
-	
 	private void createBackgroundImage() {
 		try {
     		spaceImage = new SpaceImage("/Users/kategibson/eclipse-workspace/gameGUI/components/fancyStars.jpg");

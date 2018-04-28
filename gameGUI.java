@@ -106,7 +106,8 @@ public class gameGUI extends JFrame implements ActionListener{
 
 	private void createBackgroundImage() {
 		try {
-    		spaceImage = new SpaceImage("/Users/kategibson/eclipse-workspace/gameGUI/components/stars.jpg");
+		final String currentWorkingDirectory = System.getProperty("stars.jpg");
+    		spaceImage = new SpaceImage(currentWorkingDirectory);
     		spaceImage.setPreferredSize(new Dimension(defaultWidth,defaultHeight - 120));
     		spaceImage.setBackground(new java.awt.Color(40,23,35));
     		spaceImage.setBounds(0, 0, defaultWidth, defaultHeight); 

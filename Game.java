@@ -41,9 +41,7 @@ public class Game extends Space{
       //System.out.print("Player Name: ");
     	//*************** need function in NumberOfPlayers to get player names
     	// return the array of players? Or just one player
-    	
-      String name = input.next(); // input.next() is replaced with call to getPlayerName panel
-      players[i] = new Player(name);
+      players[i] = new Player(i);
     }
   }
 

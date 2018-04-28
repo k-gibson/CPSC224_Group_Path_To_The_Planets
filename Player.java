@@ -18,10 +18,10 @@ public class Player{
 	private Die[] playerHand;
 
 
-	public Player(String name) {
+	public Player(int playerNumber) {
 		playerHand = new Die[numDice];
 		int turn = 1;
-		playerName = name;
+		playerName = Integer.toString(playerNumber);
 		playerCard = new Scorecard(playerHand);
 
 	}

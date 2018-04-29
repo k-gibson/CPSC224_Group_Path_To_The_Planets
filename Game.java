@@ -29,11 +29,10 @@ public class Game extends Space{
   * Yahtzee constructor stores an array of dice used to play the game
   */
   public Game(){
-	  // Call when start game button is pressed
-	gameGUI newGame = new gameGUI();
     //System.out.println("How many player are there? ");
     // Call get number of players panel class which returns numberOfPlayers
     NumberOfPlayers playerPanel = new NumberOfPlayers();
+    playerPanel.setVisible(true);
     numberOfPlayers = playerPanel.getPlayerNumber(); //input.nextInt(); //input.nextInt becomes call to getPlayer panel class
     players = new Player[numberOfPlayers];
     for(int i = 0; i < numberOfPlayers; i++){
@@ -55,6 +54,7 @@ public class Game extends Space{
     {
       for(int i = 0; i < numberOfPlayers; i++){
     	RollPanel newRoll = new RollPanel(players[i]);
+    	newRoll.setVisible(true);
     	// after the roll panel we need a panel to display the dice.
     	// this should be in the takeTurn function in the Player class
         players[i].takeTurn(players[i]);
@@ -66,6 +66,7 @@ public class Game extends Space{
       if(winnerFound) break;
       // call panel to display the turn number.
       TurnPanel turnPanel = new TurnPanel(numberOfTurns);
+      turnPanel.setVisible(true);
       //System.out.println("-------------------------TURN " + numberOfTurns + "------------------------");
       numberOfTurns++;
     }

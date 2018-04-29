@@ -4,6 +4,8 @@ import javax.swing.Box.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RollPanel extends JFrame implements ActionListener {
 	private JLayeredPane finalPanel = getLayeredPane();
@@ -13,16 +15,26 @@ public class RollPanel extends JFrame implements ActionListener {
 	
 	 private static final int defaultWidth = 1200;
 	 private static final int defaultHeight = 800;
+	private CompletedListener completedListener;
 	
-	public RollPanel(Player player) {
+	private Player thisPlayer;
+	
+	private Integer index = 0;
+	public RollPanel(Player player, Integer index, CompletedListener completedListener) { //, CompletedListener completedListener) {
+		this.completedListener = completedListener;
+		this.index = index;
+		thisPlayer = player;
 		createRollScreen(player);
+		this.setVisible(true);
+		this.setTitle("Race Through Space");
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		// removes the roll panel and returns to the takeTurn function of the Game class
-        finalPanel.remove(finalPanel.getIndexOf(mainPanel));
-      	finalPanel.repaint();
-      	createBackgroundImage();
+		completedListener.completed(index);
+
+		TurnPanel thisTurn = new TurnPanel(index, thisPlayer);
+		thisTurn.setVisible(true);
+		this.setVisible(false);
     }
 	
 	private void createRollScreen(Player player) {
@@ -33,8 +45,7 @@ public class RollPanel extends JFrame implements ActionListener {
 	
 	private void createMainPanel(Player player) {
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
-		mainPanel.setBackground(new java.awt.Color(40,23,35));
-        mainPanel.setPreferredSize(new Dimension(defaultWidth,defaultHeight - 120));
+        mainPanel.setPreferredSize(new Dimension(defaultWidth,defaultHeight));
         
      	//define a blank space for formatting purposes
         Filler space = new Filler(new Dimension(0, 80), new Dimension(0, 80), new Dimension(Short.MAX_VALUE, 80));
@@ -42,27 +53,30 @@ public class RollPanel extends JFrame implements ActionListener {
   	    space.setOpaque(false);
   	    mainPanel.add(space);
   	    
-  	    setUpRollButton();
-	  	mainPanel.add(rollButton);
-	    Filler blankSpace = new Filler(new Dimension(0, 80), new Dimension(0, 80), new Dimension(Short.MAX_VALUE, 80));
-	    blankSpace.setOpaque(false);
-	    mainPanel.add(blankSpace);
+        JLabel playerName = new JLabel("Player " + player.playerName + "'s Turn #" + player.getTurnNumber());
+        playerName.setFont(new Font("Krungthep",1,50));
+        playerName.setForeground(Color.white);
+        playerName.setAlignmentX(Component.CENTER_ALIGNMENT);
+  	  	mainPanel.add(playerName, BorderLayout.NORTH);
+
+  	  	Filler newSpace = new Filler(new Dimension(0, 80), new Dimension(0, 80), new Dimension(Short.MAX_VALUE, 80));
+  	  	//make the space 'see through'
+	    newSpace.setOpaque(false);
+	    mainPanel.add(newSpace);
+  	  	
+  	  	setUpRollButton();
+  	  	mainPanel.add(rollButton);
+  	  	
 	  	//this is so the background image can been seen
 	  	mainPanel.setOpaque(false);
 	  	//this is for the JLayeredPane
 	  	mainPanel.setBounds(0, 0, defaultWidth, defaultHeight);
-	  	finalPanel.add(mainPanel, JLayeredPane.PALETTE_LAYER);
-        
-        JLabel playerName = new JLabel("PLAYER " + player.playerName);
-        playerName.setFont(new Font("Krungthep",1,35));
-        playerName.setForeground(Color.white);
-        playerName.setAlignmentX(Component.CENTER_ALIGNMENT);
-  	  	mainPanel.add(playerName, BorderLayout.NORTH);
+	  	finalPanel.add(mainPanel, JLayeredPane.PALETTE_LAYER); 
 	}
 	
 	private void setUpRollButton() {
 		rollButton.setOpaque(true);
-        rollButton.setFont(new Font("Krungthep",Font.BOLD,20));
+        rollButton.setFont(new Font("Krungthep",Font.BOLD,30));
         rollButton.setBackground(new Color(67,39,59));
         rollButton.setForeground(Color.WHITE);
         rollButton.setFocusPainted(false);
@@ -74,8 +88,7 @@ public class RollPanel extends JFrame implements ActionListener {
 	
 	private void createBackgroundImage() {
 		try {
-		final String currentWorkingDirectory = System.getProperty("stars.jpg");
-    		spaceImage = new SpaceImage(currentWorkingDirectory);
+    		spaceImage = new SpaceImage("/Users/kategibson/eclipse-workspace/gameGUI/components/stars.jpg");
     		spaceImage.setPreferredSize(new Dimension(defaultWidth,defaultHeight - 120));
     		spaceImage.setBackground(new java.awt.Color(40,23,35));
     		spaceImage.setBounds(0, 0, defaultWidth, defaultHeight); 

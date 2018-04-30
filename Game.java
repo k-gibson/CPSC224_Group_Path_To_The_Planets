@@ -28,49 +28,63 @@ public class Game extends Space{
   /**
   * Yahtzee constructor stores an array of dice used to play the game
   */
-  public Game(){
+  public Game(int numberOfPlayers){
     //System.out.println("How many player are there? ");
     // Call get number of players panel class which returns numberOfPlayers
-    NumberOfPlayers playerPanel = new NumberOfPlayers();
-    playerPanel.setVisible(true);
-    numberOfPlayers = playerPanel.getPlayerNumber(); //input.nextInt(); //input.nextInt becomes call to getPlayer panel class
+	  
+	  this.numberOfPlayers = numberOfPlayers;
+	  // set the numbers of players later
+ //input.nextInt(); //input.nextInt becomes call to getPlayer panel class
     players = new Player[numberOfPlayers];
     for(int i = 0; i < numberOfPlayers; i++){
       //create new panel to input the users name panel returns user name
       //System.out.print("Player Name: ");
     	//*************** need function in NumberOfPlayers to get player names
     	// return the array of players? Or just one player
-      players[i] = new Player(i);
+      players[i] = new Player(i + 1);
     }
+    
+    
+    
+    
   }
 
   /**
     * Begins a game of Yahtzee and at the end asks the user if they would like to play again
     */
   public void playGame(){
-    int numberOfTurns = 0;
-    boolean winnerFound = false;
-    while (numberOfTurns <= 7 && !winnerFound)
-    {
-      for(int i = 0; i < numberOfPlayers; i++){
-    	RollPanel newRoll = new RollPanel(players[i]);
-    	newRoll.setVisible(true);
-    	// after the roll panel we need a panel to display the dice.
-    	// this should be in the takeTurn function in the Player class
-        players[i].takeTurn(players[i]);
-        winnerFound = players[i].score(players[i]);
-        if(winnerFound){
-          break;
-        }
-      }
-      if(winnerFound) break;
-      // call panel to display the turn number.
-      TurnPanel turnPanel = new TurnPanel(numberOfTurns);
-      turnPanel.setVisible(true);
-      //System.out.println("-------------------------TURN " + numberOfTurns + "------------------------");
-      numberOfTurns++;
-    }
-    endGame();
+//	final boolean winnerFound = false;
+
+	  CompletedListener completedListener = new CompletedListener() {
+  			@Override
+  			public void completed(Object data) {
+  				System.out.println("HELLLO WORLD");
+  				Integer index = (Integer)data;
+  				
+  				System.out.println("index is " + index);
+  					
+  				// after the roll panel we need a panel to display the dice.
+  				// this should be in the takeTurn function in the Player class
+  				players[index].takeTurn(players[index]);
+  				if(!players[index].score(players[index]) && index + 1 < players.length){
+  					new RollPanel(players[index + 1], index + 1, this);
+  				}
+  			}
+  		};
+  	
+  	new RollPanel(players[0], 0, completedListener);
+//    int numberOfTurns = 0;
+//    while (numberOfTurns <= 7 && !winnerFound)
+//    {
+//
+//      if(winnerFound) break;
+//      // call panel to display the turn number.
+//      TurnPanel turnPanel = new TurnPanel(numberOfTurns);
+//      turnPanel.setVisible(true);
+//      //System.out.println("-------------------------TURN " + numberOfTurns + "------------------------");
+//      numberOfTurns++;
+//    }
+//    endGame();
   }
 
     /**
@@ -80,6 +94,7 @@ public class Game extends Space{
     //hand need to be sorted to check for straights
     for(int i = 0; i < numberOfPlayers; i++){
       players[i].finalScore(players[i]);
+      
     }
   }
 }

@@ -11,6 +11,7 @@ public class RolledDiePanel extends JPanel{
 	}
 	
 	private void setUpPanel() {
+		mainPanel.setBackground(new java.awt.Color(0,0,0));
 		//creates a JPanel with Gridlayout that displays the dice and what they rolled
 		
 				/*

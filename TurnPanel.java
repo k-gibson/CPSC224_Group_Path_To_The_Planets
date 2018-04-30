@@ -7,58 +7,68 @@ import java.io.IOException;
 
 
 public class TurnPanel extends JFrame implements ActionListener{
-	private JLayeredPane finalPanel = getLayeredPane();
 	private JPanel mainPanel = new JPanel();
-	private JPanel spaceImage;
 	private JButton enterButton = new JButton("CONTINUE");
+	private JButton seeScorecardButton = new JButton("SEE SCORECARD");
+	
+	private Player thisPlayer;
+	private int numbaOfTurns;
+	
 	
 	 private static final int defaultWidth = 1200;
 	 private static final int defaultHeight = 800;
 	
-	public TurnPanel(int numberOfTurns) {
-		createTurnScreen(numberOfTurns);
+	public TurnPanel(int numberOfTurns, Player player) {
+		thisPlayer = player;
+		numbaOfTurns = numberOfTurns;
+		
+		setSize(defaultWidth, defaultHeight);
+		createMainPanel(numberOfTurns);
+		this.setTitle("Race Through Space");
+		this.setVisible(true);
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		// gets rid of the turn panel and returns to the takeTurn function in the Game class
-      	finalPanel.remove(finalPanel.getIndexOf(mainPanel));
-      	finalPanel.repaint();
-        createBackgroundImage();
+		if(e.getSource() == seeScorecardButton) {
+			System.out.println("see scorecard");
+		}
+		else {
+			// gets rid of the turn panel and returns to the takeTurn function in the Game class
+	      	this.setVisible(false);
+		}
     }
-	
-	private void createTurnScreen(int numberOfTurns) {
-		setSize(defaultWidth, defaultHeight);
-		createBackgroundImage();
-		createMainPanel(numberOfTurns);
-	}
 	
 	private void createMainPanel(int numberOfTurns) {
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 		mainPanel.setBackground(new java.awt.Color(40,23,35));
         mainPanel.setPreferredSize(new Dimension(defaultWidth,defaultHeight - 120));
         
-     	//define a blank space for formatting purposes
-        Filler space = new Filler(new Dimension(0, 80), new Dimension(0, 80), new Dimension(Short.MAX_VALUE, 80));
-        //make the space 'see through'
-  	    space.setOpaque(false);
-  	    mainPanel.add(space);
+        addButtonPanels();
+        
+        JLabel yourRoll = new JLabel("Your Roll:");
+        yourRoll.setFont(new Font("Krungthep",1,35));
+        yourRoll.setForeground(Color.white);
+        yourRoll.setAlignmentX(Component.CENTER_ALIGNMENT);
+        yourRoll.setBackground(new java.awt.Color(40,23,35));
+  	  	mainPanel.add(yourRoll, BorderLayout.NORTH);
   	    
-  	    setUpEnterButton();
-	  	mainPanel.add(enterButton);
 	    Filler blankSpace = new Filler(new Dimension(0, 80), new Dimension(0, 80), new Dimension(Short.MAX_VALUE, 80));
 	    blankSpace.setOpaque(false);
 	    mainPanel.add(blankSpace);
-	  	//this is so the background image can been seen
-	  	mainPanel.setOpaque(false);
+	    
+	    addRolledDicePanel();
+	    
 	  	//this is for the JLayeredPane
 	  	mainPanel.setBounds(0, 0, defaultWidth, defaultHeight);
-	  	finalPanel.add(mainPanel, JLayeredPane.PALETTE_LAYER);
         
-        JLabel turnNum = new JLabel("TURN " + numberOfTurns);
-        turnNum.setFont(new Font("Krungthep",1,35));
-        turnNum.setForeground(Color.white);
-        turnNum.setAlignmentX(Component.CENTER_ALIGNMENT);
-  	  	mainPanel.add(turnNum, BorderLayout.NORTH);
+  	  	add(mainPanel);
+	}
+	
+	private void addRolledDicePanel() {
+		
+		RolledDiePanel rolledDiePanel = new RolledDiePanel(thisPlayer, numbaOfTurns);
+		
+		mainPanel.add(rolledDiePanel);
 	}
 	
 	private void setUpEnterButton() {
@@ -68,23 +78,37 @@ public class TurnPanel extends JFrame implements ActionListener{
         enterButton.setForeground(Color.WHITE);
         enterButton.setFocusPainted(false);
         enterButton.setBorderPainted(false);
-        enterButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         enterButton.addActionListener(this); 
 	}
 	
-	private void createBackgroundImage() {
-		try {
-		final String currentWorkingDirectory = System.getProperty("stars.jpg");
-    		spaceImage = new SpaceImage(currentWorkingDirectory);
-    		spaceImage.setPreferredSize(new Dimension(defaultWidth,defaultHeight - 120));
-    		spaceImage.setBackground(new java.awt.Color(40,23,35));
-    		spaceImage.setBounds(0, 0, defaultWidth, defaultHeight); 
-    	} catch (IOException e) {
-    		JLabel oops = new JLabel("oops");
-    		this.add(oops);
-    	}
-		
-		finalPanel.add(spaceImage, JLayeredPane.DEFAULT_LAYER);
+	private void setUpScorecardButton() {
+		seeScorecardButton.setOpaque(true);
+        seeScorecardButton.setFont(new Font("Krungthep",Font.BOLD,20));
+        seeScorecardButton.setBackground(new Color(67,39,59));
+        seeScorecardButton.setForeground(Color.WHITE);
+        seeScorecardButton.setFocusPainted(false);
+        seeScorecardButton.setBorderPainted(false);
+        
+        seeScorecardButton.addActionListener(this); 
 	}
+	
+	private void addButtonPanels() {
+		setUpEnterButton(); 
+		setUpScorecardButton();
+		
+    	JPanel mainButtonPanel = new JPanel();
+        mainButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        mainButtonPanel.setBackground(new java.awt.Color(40,23,35));
+        mainButtonPanel.add(seeScorecardButton);
+        this.add(mainButtonPanel,BorderLayout.NORTH);
+     
+        
+        JPanel lowerButtonsPanel = new JPanel();
+        lowerButtonsPanel.setLayout(new BoxLayout(lowerButtonsPanel, BoxLayout.LINE_AXIS));
+        lowerButtonsPanel.add(Box.createHorizontalGlue());
+        lowerButtonsPanel.add(enterButton);
+        lowerButtonsPanel.setBackground(new java.awt.Color(40,23,35));
+        this.add(lowerButtonsPanel, BorderLayout.SOUTH);
+    }
 }

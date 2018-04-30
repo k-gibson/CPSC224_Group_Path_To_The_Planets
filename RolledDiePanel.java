@@ -21,5 +21,6 @@ public class RolledDiePanel extends JPanel{
 				 * ^^^ for every die in every 
 				 * 
 				 */
+		this.add(mainPanel);
 	}
 }

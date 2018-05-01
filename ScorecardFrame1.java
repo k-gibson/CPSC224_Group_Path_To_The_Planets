@@ -11,8 +11,8 @@ public class ScorecardFrame1 extends JFrame implements ActionListener {
     private static final int defaultHeight = 800;
     private static final int scoreLineHeight = defaultHeight/15;
     
-    private JButton nextButton = new JButton("Next");
-    private JPanel cardPanel = new JPanel(new CardLayout());
+    private JButton nextButton = new JButton("Done");
+    private JPanel cardPanel = new JPanel();
     
     public ScorecardFrame1(int[] upperCardScores, int smallStraight, int largeStraight, int triForce, int totalScore) {
     	setSize(defaultWidth, defaultHeight);
@@ -64,7 +64,6 @@ public class ScorecardFrame1 extends JFrame implements ActionListener {
         cardTitle.setForeground(Color.white);
         title.setBackground(new java.awt.Color(40,23,35));
         title.add(cardTitle);
-        returnPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         returnPanel.add(title, BorderLayout.NORTH);
         
         //add lines to display the score on the screen
@@ -78,39 +77,68 @@ public class ScorecardFrame1 extends JFrame implements ActionListener {
         	System.out.println(upperCardScores.length);
         }
         //planet labels
+        JPanel score = new JPanel();
+        score.setBackground(new java.awt.Color(40,23,35));
+        score.setLayout(new FlowLayout(FlowLayout.LEFT));
         JLabel mercury = new JLabel("Mercury"); JLabel mercuryScore = new JLabel(stringScores[0]);
+        mercury.setFont(new Font("Krungthep",1,24)); mercuryScore.setFont(new Font("Krungthep",1,24));
+        mercury.setForeground(Color.white); mercuryScore.setForeground(Color.white);
         JLabel venus = new JLabel("Venus"); JLabel venusScore = new JLabel(stringScores[1]);
+        venus.setFont(new Font("Krungthep",1,24)); venusScore.setFont(new Font("Krungthep",1,24));
+        venus.setForeground(Color.white); venusScore.setForeground(Color.white);
         JLabel mars = new JLabel("Mars"); JLabel marsScore = new JLabel(stringScores[2]);
+        mars.setFont(new Font("Krungthep",1,24)); marsScore.setFont(new Font("Krungthep",1,24));
+        mars.setForeground(Color.white); marsScore.setForeground(Color.white);
         JLabel jupiter = new JLabel("Jupiter"); JLabel jupiterScore = new JLabel(stringScores[3]);
+        jupiter.setFont(new Font("Krungthep",1,24)); jupiterScore.setFont(new Font("Krungthep",1,24));
+        jupiter.setForeground(Color.white); jupiterScore.setForeground(Color.white);
         JLabel saturn = new JLabel("Saturn"); JLabel saturnScore = new JLabel(stringScores[4]);
+        saturn.setFont(new Font("Krungthep",1,24)); saturnScore.setFont(new Font("Krungthep",1,24));
+        saturn.setForeground(Color.white); saturnScore.setForeground(Color.white);
         JLabel uranus = new JLabel("Uranus"); JLabel uranusScore = new JLabel(stringScores[5]);
+        uranus.setFont(new Font("Krungthep",1,24)); uranusScore.setFont(new Font("Krungthep",1,24));
+        uranus.setForeground(Color.white); uranusScore.setForeground(Color.white);
         JLabel neptune = new JLabel("Neptune"); JLabel neptuneScore = new JLabel(stringScores[6]);
-        returnPanel.add(mercury); returnPanel.add(mercuryScore);
-        returnPanel.add(venus); returnPanel.add(venusScore);
-        returnPanel.add(mars); returnPanel.add(marsScore);
-        returnPanel.add(jupiter); returnPanel.add(jupiterScore);
-        returnPanel.add(saturn); returnPanel.add(saturnScore);
-        returnPanel.add(uranus); returnPanel.add(uranusScore);
-        returnPanel.add(neptune); returnPanel.add(neptuneScore);
+        neptune.setFont(new Font("Krungthep",1,24)); neptuneScore.setFont(new Font("Krungthep",1,24));
+        neptune.setForeground(Color.white); neptuneScore.setForeground(Color.white);
         
+        score.add(mercury); score.add(mercuryScore);
+        score.add(venus); score.add(venusScore);
+        score.add(mars); score.add(marsScore);
+        score.add(jupiter); score.add(jupiterScore);
+        score.add(saturn); score.add(saturnScore);
+        score.add(uranus); score.add(uranusScore);
+        score.add(neptune); score.add(neptuneScore);
+
         //add planet labels in between lines
-        mercury.setLocation(200,scoreLineHeight-25); mercuryScore.setLocation(600,scoreLineHeight-25);
-        venus.setLocation(200,scoreLineHeight*2-25); venusScore.setLocation(600,scoreLineHeight*2-25);
-        mars.setLocation(200,scoreLineHeight*3-25); marsScore.setLocation(600,scoreLineHeight*3-25);
-        jupiter.setLocation(200,scoreLineHeight*4-25); jupiterScore.setLocation(600,scoreLineHeight*4-25);
-        saturn.setLocation(200,scoreLineHeight*5-25); saturnScore.setLocation(600,scoreLineHeight*5-25);
-        uranus.setLocation(200,scoreLineHeight*6-25); uranusScore.setLocation(600,scoreLineHeight*6-25);
-        neptune.setLocation(200,scoreLineHeight*7-25); neptuneScore.setLocation(600,scoreLineHeight*7-25);
+        mercury.setLocation(20,scoreLineHeight-25); mercuryScore.setLocation(60,scoreLineHeight-25);
+        venus.setLocation(20,scoreLineHeight*2-25); venusScore.setLocation(60,scoreLineHeight*2-25);
+        mars.setLocation(20,scoreLineHeight*3-25); marsScore.setLocation(60,scoreLineHeight*3-25);
+        jupiter.setLocation(20,scoreLineHeight*4-25); jupiterScore.setLocation(60,scoreLineHeight*4-25);
+        saturn.setLocation(20,scoreLineHeight*5-25); saturnScore.setLocation(60,scoreLineHeight*5-25);
+        uranus.setLocation(20,scoreLineHeight*6-25); uranusScore.setLocation(60,scoreLineHeight*6-25);
+        neptune.setLocation(20,scoreLineHeight*7-25); neptuneScore.setLocation(60,scoreLineHeight*7-25);
         
         //bonus score labels
         JLabel smallStrght = new JLabel("Small Straight"); JLabel smallStrghtScore = new JLabel(String.valueOf(smallStraight));
+        smallStrght.setFont(new Font("Krungthep",1,24)); smallStrghtScore.setFont(new Font("Krungthep",1,24));
+        smallStrght.setForeground(Color.white); smallStrghtScore.setForeground(Color.white);
         JLabel largeStrght = new JLabel("Large Straight"); JLabel largeStrghtScore = new JLabel(String.valueOf(largeStraight));
+        largeStrght.setFont(new Font("Krungthep",1,24)); largeStrghtScore.setFont(new Font("Krungthep",1,24));
+        largeStrght.setForeground(Color.white); largeStrghtScore.setForeground(Color.white);
         JLabel triFrc = new JLabel("Tri Force"); JLabel triFrcScore = new JLabel(String.valueOf(triForce));
+        triFrc.setFont(new Font("Krungthep",1,24)); triFrcScore.setFont(new Font("Krungthep",1,24));
+        triFrc.setForeground(Color.white); triFrcScore.setForeground(Color.white);
         JLabel total = new JLabel("TOTAL SCORE"); JLabel ttlScore = new JLabel(String.valueOf(totalScore));
-        returnPanel.add(smallStrght);
-        returnPanel.add(largeStrght);
-        returnPanel.add(triFrc);
-        returnPanel.add(total);
+        total.setFont(new Font("Krungthep",1,24)); ttlScore.setFont(new Font("Krungthep",1,24));
+        total.setForeground(Color.white); ttlScore.setForeground(Color.white);
+        
+        
+        score.add(smallStrght); score.add(smallStrghtScore);
+        score.add(largeStrght); score.add(largeStrghtScore);
+        score.add(triFrc); score.add(triFrcScore);
+        score.add(total); score.add(ttlScore);
+        score.setOpaque(true);
         
         //set locations of bonus scores between the lines. It might not be perfectly lined up. I kind of guessed on the math
         // and I still can't test anything so I can't see it....
@@ -119,6 +147,8 @@ public class ScorecardFrame1 extends JFrame implements ActionListener {
         triFrc.setLocation(200, scoreLineHeight*11-25); triFrcScore.setLocation(600, scoreLineHeight*11-25);
         total.setLocation(200, scoreLineHeight*13-25); ttlScore.setLocation(600, scoreLineHeight*13-25);
         
+        returnPanel.add(score, BorderLayout.NORTH);
+        returnPanel.setOpaque(true);
         return returnPanel; 
     }
     

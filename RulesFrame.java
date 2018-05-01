@@ -68,6 +68,7 @@ public class RulesFrame extends JFrame implements ActionListener{
         lowerButtonsPanel.add(nextButton);
         lowerButtonsPanel.setBackground(new java.awt.Color(40,23,35));
         this.add(lowerButtonsPanel, BorderLayout.SOUTH);
+	previousButton.setVisible(false);
     }
     
     private void formatMainButton() {

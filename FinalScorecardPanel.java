@@ -58,7 +58,7 @@ public class FinalScorecardPanel extends JFrame implements ActionListener {
         
         //player labels
         JPanel scoresPanel = new JPanel();
-        scoresPanel.setLayout(new GridLayout(7,2,10,10));
+        scoresPanel.setLayout(new GridLayout(players.length,2,10,10));
         scoresPanel.setBackground(new java.awt.Color(40,23,35));
         scoresPanel.setPreferredSize(new Dimension(defaultWidth,defaultHeight - 120));
         JLabel[] playerLabels = new JLabel[players.length];

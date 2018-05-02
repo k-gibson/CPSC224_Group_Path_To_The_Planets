@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 
-public class gameGUI extends JFrame implements ActionListener{
+public class gameGUI extends JFrame{
 	private JPanel mainPanel = new JPanel();
 	private SpaceImage spaceImage;
 	private JLayeredPane finalPanel = getLayeredPane();
@@ -36,7 +36,14 @@ public class gameGUI extends JFrame implements ActionListener{
         
         playButton.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
-	        	 Game raceThroughSpace = new Game();
+	        	    NumberOfPlayers playerPanel = new NumberOfPlayers(new CompletedListener() {
+	        	    	@Override
+	        	    	public void completed(Object numberOfPlayers) {
+	        	    		Game raceThroughSpace = new Game((int)numberOfPlayers);
+	       	        	 	raceThroughSpace.playGame();
+	        	    	}
+	        	    });
+	        	    playerPanel.setVisible(true);
 	         }
 	      });
 	}
@@ -106,8 +113,8 @@ public class gameGUI extends JFrame implements ActionListener{
 
 	private void createBackgroundImage() {
 		try {
-		final String currentWorkingDirectory = System.getProperty("stars.jpg");
-    		spaceImage = new SpaceImage(currentWorkingDirectory);
+			//inal String currentWorkingDirectory = System.getProperty("stars.jpg");
+    		spaceImage = new SpaceImage("/Users/kategibson/eclipse-workspace/gameGUI/components/stars.jpg");
     		spaceImage.setPreferredSize(new Dimension(defaultWidth,defaultHeight - 120));
     		spaceImage.setBackground(new java.awt.Color(40,23,35));
     		spaceImage.setBounds(0, 0, defaultWidth, defaultHeight); 
@@ -119,17 +126,5 @@ public class gameGUI extends JFrame implements ActionListener{
 		finalPanel.add(spaceImage, JLayeredPane.DEFAULT_LAYER);
 	}
 	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == rulesButton) {
-			 RulesFrame rules = new RulesFrame();
-        	 rules.setTitle("Race Through Space Rules");
-        	 rules.setVisible(true);
-    	}
-    	else {
-    		mainPanel.setBackground(Color.green);
-       	 	Game raceThroughSpace = new Game();
-    	}
-		
-	}
+	
 }

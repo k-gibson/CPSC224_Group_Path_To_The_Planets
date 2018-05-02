@@ -13,7 +13,7 @@ public class FinalScorecardPanel extends JFrame implements ActionListener {
     private JButton doneButton = new JButton("Done");
     private JPanel cardPanel = new JPanel();
     
-    public FinalScorecardPanel(String[] players) {
+    public FinalScorecardPanel(Player[] players) {
     	setSize(defaultWidth, defaultHeight);
     	this.setLayout(new BorderLayout());
     	
@@ -42,7 +42,7 @@ public class FinalScorecardPanel extends JFrame implements ActionListener {
         doneButton.addActionListener(this);
     }
     
-    private JPanel createCardPanel(String[] players) {
+    private JPanel createCardPanel(Player[] players) {
     	JPanel returnPanel = new JPanel();
     	returnPanel.setLayout(new BoxLayout(returnPanel, BoxLayout.PAGE_AXIS));
     	returnPanel.setBackground(new java.awt.Color(40,23,35));
@@ -58,7 +58,7 @@ public class FinalScorecardPanel extends JFrame implements ActionListener {
         
         //player labels
         JPanel scoresPanel = new JPanel();
-        scoresPanel.setLayout(new GridLayout(7,2,1,1));
+        scoresPanel.setLayout(new GridLayout(7,2,10,10));
         scoresPanel.setBackground(new java.awt.Color(40,23,35));
         scoresPanel.setPreferredSize(new Dimension(defaultWidth,defaultHeight - 120));
         JLabel[] playerLabels = new JLabel[players.length];
@@ -66,60 +66,22 @@ public class FinalScorecardPanel extends JFrame implements ActionListener {
         // convert players scores to strings
         String[] playerScores = new String[players.length];
         for(int i = 0; i < players.length; i++) {
-        	playerScores[i] = players[i].playerCard.totalScore.toString();
+        	playerScores[i] = String.valueOf(players[i].playerCard.totalScore);
+        	System.out.println(playerScores[i]);
         }
         
         for(int i = 0; i < players.length; i++) {
-        	playerLabels[i] = new JLabel("Player " + (i+1));
+        	playerLabels[i] = new JLabel("        Player " + (i+1));
         	playerScoreLabels[i] = new JLabel(playerScores[i]);
+        	playerLabels[i].setFont(new Font("Krungthep",1,45));
+            playerLabels[i].setForeground(Color.white);
+            playerScoreLabels[i].setFont(new Font("Krungthep",1,45));
+            playerScoreLabels[i].setForeground(Color.white);
+        	
         	scoresPanel.add(playerLabels[i]);
+        	scoresPanel.add(playerScoreLabels[i]);
         }
         
-        /*String[] columnNames = {"Player",
-                                "Total Points"
-                               };
-        
-        Object[][] scores = {
-        	    {players, 0,},
-        	    {"Venus", stringScores[1],},
-        	    {"Mars", stringScores[2],},
-        	    {"Jupiter", stringScores[3],},
-        	    {"Saturn", stringScores[4],},
-        	    {"Uranus", stringScores[5],},
-        	    {"Neptune", stringScores[6],},
-        	    {"Small Straight", String.valueOf(smallStraight),},
-        	    {"Large Straight", String.valueOf(largeStraight),},
-        	    {"Tri Force", String.valueOf(triForce),},
-        	    {"Total Score", String.valueOf(totalScore),}
-        	};*/
-        
-        JTable table = new JTable(scores, columnNames);
-        table.setPreferredSize(new Dimension(defaultWidth - 500, defaultHeight));
-        table.setBackground(new java.awt.Color(40,23,35));
-        table.setFont(new Font("Krungthep",1,24));
-        table.setForeground(Color.white);
-        
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
-        table.getColumnModel().getColumn(0).setCellRenderer( centerRenderer );
-        table.getColumnModel().getColumn(1).setCellRenderer( centerRenderer );
-        
-        int rowHeight = 50;
-        table.setRowHeight(0,rowHeight);
-        table.setRowHeight(1,rowHeight);
-        table.setRowHeight(2,rowHeight);
-        table.setRowHeight(3,rowHeight);
-        table.setRowHeight(4,rowHeight);
-        table.setRowHeight(5,rowHeight);
-        table.setRowHeight(6,rowHeight);
-        table.setRowHeight(7,rowHeight);
-        table.setRowHeight(8,rowHeight);
-        table.setRowHeight(9,rowHeight);
-        table.setRowHeight(10,rowHeight);
-        table.setRowHeight(11,rowHeight);
-        
-        
-        scoresPanel.add(table);
         returnPanel.add(scoresPanel,BorderLayout.NORTH);
         returnPanel.setOpaque(true);
         return returnPanel; 

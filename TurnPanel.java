@@ -9,7 +9,7 @@ import java.io.IOException;
 public class TurnPanel extends JFrame implements ActionListener{
 	private JPanel mainPanel = new JPanel();
 	private JButton enterButton = new JButton("CONTINUE");
-	private JButton seeScorecardButton = new JButton("SEE SCORECARD");
+	private JButton seeScorecardButton = new JButton("SEE YOUR SCORECARD");
 	
 	private Player thisPlayer;
 	private int numbaOfTurns;
@@ -30,7 +30,9 @@ public class TurnPanel extends JFrame implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == seeScorecardButton) {
-			System.out.println("see scorecard");
+			ScorecardFrame scorecardFrame = new ScorecardFrame(thisPlayer.playerCard.upperCardScores, thisPlayer.playerCard.smallStraight, thisPlayer.playerCard.largeStraight,
+					thisPlayer.playerCard.triForce, thisPlayer.playerCard.totalScore);
+			scorecardFrame.setVisible(true);
 		}
 		else {
 			// gets rid of the turn panel and returns to the takeTurn function in the Game class

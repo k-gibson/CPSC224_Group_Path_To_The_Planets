@@ -25,7 +25,6 @@ public class ScorecardFrame extends JFrame implements ActionListener {
     	
     	addButton();
     	add(cardPanel);
-    	
     }
     
     private void addButton() {
@@ -38,7 +37,7 @@ public class ScorecardFrame extends JFrame implements ActionListener {
     
     private void formatNextButton() {
     	nextButton.setOpaque(true);
-        nextButton.setFont(new Font("Krungthep",Font.BOLD,30));
+        nextButton.setFont(new Font("Krungthep",Font.BOLD,20));
         nextButton.setBackground(new Color(67,39,59));
         nextButton.setForeground(Color.WHITE);
         nextButton.setFocusPainted(false);
@@ -127,10 +126,6 @@ public class ScorecardFrame extends JFrame implements ActionListener {
     
     public void actionPerformed(ActionEvent e)
     { 
-    	if(e.getSource() == nextButton) {
-    		cardPanel.remove(cardPanel);
-    		cardPanel.revalidate();
-    		cardPanel.repaint();
-    	}
+    	this.setVisible(false);
     }
 }

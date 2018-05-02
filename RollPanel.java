@@ -76,8 +76,8 @@ public class RollPanel extends JFrame implements ActionListener {
 	
 	private void setUpRollButton() {
 		rollButton.setOpaque(true);
-        rollButton.setFont(new Font("Krungthep",Font.BOLD,30));
-        rollButton.setBackground(new Color(67,39,59));
+        rollButton.setFont(new Font("Krungthep",Font.BOLD,100));
+        rollButton.setBackground(new Color(176,4,28));
         rollButton.setForeground(Color.WHITE);
         rollButton.setFocusPainted(false);
         rollButton.setBorderPainted(false);

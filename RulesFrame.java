@@ -68,7 +68,7 @@ public class RulesFrame extends JFrame implements ActionListener{
         lowerButtonsPanel.add(nextButton);
         lowerButtonsPanel.setBackground(new java.awt.Color(40,23,35));
         this.add(lowerButtonsPanel, BorderLayout.SOUTH);
-	previousButton.setVisible(false);
+        previousButton.setVisible(false);
     }
     
     private void formatMainButton() {
@@ -125,7 +125,7 @@ public class RulesFrame extends JFrame implements ActionListener{
     		rulesIndex--; 
 			Component otherSource = nextButton;
 			otherSource.setVisible(true);
-    		if (rulesIndex <= 0) {
+    		if (rulesIndex <= 1) {
     			Component source = previousButton;
     			source.setVisible(false); 
     		}
@@ -367,12 +367,22 @@ public class RulesFrame extends JFrame implements ActionListener{
         description2.setForeground(Color.white);
         rulesPanel4.add(description2);
         
-        JLabel description3 = new JLabel("<html>•If you run out of turns without making it to a single planet, you earn the NASA award. If you earn the NASA award, you automatically win.</html>");
+        JLabel description3 = new JLabel("<html>•If you visit 2 adjacent planets in a turn, it is a small straight. You earn 30 points.</html>");
         description3.setFont(new Font("Verdana",1,20));
         description3.setForeground(Color.white);
         rulesPanel4.add(description3);
         
-        rulesPanel4.setLayout(new GridLayout(8,4));
+        JLabel description4 = new JLabel("<html>•If you visit 3 adjacent planets in a turn, it is a large straight. You earn 50 points.</html>");
+        description4.setFont(new Font("Verdana",1,20));
+        description4.setForeground(Color.white);
+        rulesPanel4.add(description4);
+        
+        JLabel description5 = new JLabel("<html>•If you run out of turns without making it to a single planet, you earn the NASA award. If you earn the NASA award, you automatically win.</html>");
+        description5.setFont(new Font("Verdana",1,20));
+        description5.setForeground(Color.white);
+        rulesPanel4.add(description5);
+        
+        rulesPanel4.setLayout(new GridLayout(12,4));
         
         return rulesPanel4;
     }

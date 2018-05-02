@@ -12,22 +12,21 @@ import java.util.ArrayList;
 public class Player{
 
 	public String playerName = "";
-	private static int numRolls = 7;
 	private static int numDice = 7;
-	private Scorecard playerCard;
+	public Scorecard playerCard;
 	private Die[] playerHand;
+	private int turn = 1;
 
 
 	public Player(int playerNumber) {
 		playerHand = new Die[numDice];
-		int turn = 1;
 		playerName = Integer.toString(playerNumber);
 		playerCard = new Scorecard(playerHand);
 
 	}
+	
 
 	public void takeTurn(Player player){
-		// No GUI needed in this function
 		for(int i = 0; i < numDice; i++){
 			this.playerHand[i] = new Die();
 		}
@@ -36,7 +35,12 @@ public class Player{
 		}
 		// instead of calling displayHand, we can call new panel to display roll
 			displayHand(player); //DISPLAYROLL PANEL HERE
+			turn++;
 			System.out.println("");
+	}
+	
+	public int getTurnNumber() {
+		return turn;
 	}
 
 	private void displayHand(Player player){
@@ -60,8 +64,6 @@ public class Player{
     if(player.playerCard.checkForWinner()){
     	// Create a new panel that prints out "Congrats, you won."
     	WinFrame winnerPanel = new WinFrame();
-      //System.out.println("YOU'VE WON!");
-      //System.out.println("Congratulations " + player.playerName);
       winnerFound = true;
     }
     return winnerFound;

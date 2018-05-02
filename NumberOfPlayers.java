@@ -14,16 +14,23 @@ public class NumberOfPlayers extends JFrame implements ActionListener{
 	private JTextField input = new JTextField (2);
 	private JButton enterButton = new JButton("ENTER");
 	private boolean hasUserInput = false;
+	private CompletedListener completedListener;
 	
-	static int numberOfPlayers;
+	static Integer numberOfPlayers;
 	
 	private static final int defaultWidth = 1200;
     private static final int defaultHeight = 800;
 	
-	public NumberOfPlayers() {
+	public NumberOfPlayers(CompletedListener completedListener) {
+		this.completedListener = completedListener;
 		setSize(defaultWidth, defaultHeight);
 		createBackgroundImage(); 
 		createMainPanel();
+	}
+	
+	//to see if a user has inputed the number of players
+	public boolean getHasUserInput() {
+		return hasUserInput;
 	}
 	
 	public int getPlayerNumber() {
@@ -32,7 +39,6 @@ public class NumberOfPlayers extends JFrame implements ActionListener{
 	
 	private void createMainPanel() {
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
-		mainPanel.setBackground(new java.awt.Color(40,23,35));
         mainPanel.setPreferredSize(new Dimension(defaultWidth,defaultHeight - 120));
         
      	//define a blank space for formatting purposes
@@ -87,25 +93,27 @@ public class NumberOfPlayers extends JFrame implements ActionListener{
 	 public void actionPerformed(ActionEvent e) {
        	 String userInput = input.getText();
        	 numberOfPlayers = Integer.parseInt(userInput);
-       	 
-       	//numberOfPlayersListener.update(numberOfPlayers);
+       	
        	hasUserInput = true;
        	 if(numberOfPlayers > 7) {
-       		 JLabel error = new JLabel("Sorry, you can only have up to 7 players");
+       		 JLabel error = new JLabel("<html>Sorry, you can only have up to 7 players, please close the window and try again<html>");
        		 error.setFont(new Font("Krungthep",1,35));
        		 error.setForeground(Color.white);
        		 error.setBounds(0, 0, defaultWidth, defaultHeight);
+       		 input.setText("");
        		 finalPanel.add(error, JLayeredPane.POPUP_LAYER);
        		 finalPanel.repaint();
        		 hasUserInput = false;
        	 }
+       	this.completedListener.completed(numberOfPlayers);
        	 
        	 System.out.println(numberOfPlayers);
        	 if (hasUserInput) {
        		 this.setVisible(false);
-       	 }
-     }
-	 
+       	}
+    }
+
+	
 	private void createBackgroundImage() {
 		try {
     		spaceImage = new SpaceImage("/Users/kategibson/eclipse-workspace/gameGUI/components/fancyStars.jpg");

@@ -53,15 +53,10 @@ public class Game extends Space{
     * Begins a game of Yahtzee and at the end asks the user if they would like to play again
     */
   public void playGame(){
-//	final boolean winnerFound = false;
-
 	  CompletedListener completedListener = new CompletedListener() {
   			@Override
   			public void completed(Object data) {
-  				System.out.println("HELLLO WORLD");
   				Integer index = (Integer)data;
-  				
-  				System.out.println("index is " + index);
   					
   				// after the roll panel we need a panel to display the dice.
   				// this should be in the takeTurn function in the Player class

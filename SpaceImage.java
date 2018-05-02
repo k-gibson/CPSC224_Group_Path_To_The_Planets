@@ -19,10 +19,10 @@ public class SpaceImage extends JPanel {
     setLayout(null);
   }
 
-  public void paintComponent(Graphics g) {
-    super.paintComponent(g);
+  public void paintComponent(Graphics graphics) {
+    super.paintComponent(graphics);
 
     // Draw the background image.
-    g.drawImage(backgroundImage, 0, 0, this);
+    graphics.drawImage(backgroundImage, 0, 0, this);
   }
 }

@@ -1,3 +1,12 @@
+/**
+* This class displays the dice rolled by a single player in a single turn
+* CPSC 224-01, Spring 2018
+* Final Project
+* class Scorecard.java
+* @author Parker Mooseker
+* @version v1.0 5/4/2018
+*/
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.Box.*;
@@ -28,11 +37,13 @@ public class RolledDiePanel extends JPanel {
 	private ArrayList<String> travelLabel = new ArrayList<String>();
 	private String dieName = "";
 
-
+	 /**
+  	* RolledDie constructor 
+ 	* @param Player player is the single player who rolled 
+	* @param int numberOfTurns is the number of turn the player is on
+  	*/
 	public RolledDiePanel(Player player, int numberOfTurns) throws IOException {
 		try {
-			
-			
 			thisPlayer = player;
 			setUpPanel();
 			loadPlanetImages();

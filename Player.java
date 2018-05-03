@@ -64,4 +64,12 @@ public class Player{
     }
     return winnerFound;
   }
+  
+  public String getHandValue(int index) {
+		String handValAsString = "";
+
+		handValAsString = playerHand[index].getValue().toString();
+
+		return handValAsString;
+	}
 }

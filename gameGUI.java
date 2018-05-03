@@ -113,18 +113,15 @@ public class gameGUI extends JFrame{
 
 	private void createBackgroundImage() {
 		try {
-			//inal String currentWorkingDirectory = System.getProperty("stars.jpg");
-    		spaceImage = new SpaceImage("/Users/kategibson/eclipse-workspace/gameGUI/components/stars.jpg");
-    		spaceImage.setPreferredSize(new Dimension(defaultWidth,defaultHeight - 120));
-    		spaceImage.setBackground(new java.awt.Color(40,23,35));
-    		spaceImage.setBounds(0, 0, defaultWidth, defaultHeight); 
-    	} catch (IOException e) {
-    		JLabel oops = new JLabel("oops");
-    		this.add(oops);
-    	}
-		
+			spaceImage = new SpaceImage(8);
+			spaceImage.setPreferredSize(new Dimension(defaultWidth, defaultHeight));
+			spaceImage.setBackground(new java.awt.Color(40, 23, 35));
+			spaceImage.setBounds(0, 0, defaultWidth, defaultHeight);
+		} catch (IOException e) {
+			JLabel oops = new JLabel("oops");
+			this.add(oops);
+		}
+
 		finalPanel.add(spaceImage, JLayeredPane.DEFAULT_LAYER);
 	}
-	
-	
 }

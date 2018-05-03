@@ -18,7 +18,7 @@ public class TurnPanel extends JFrame implements ActionListener{
 	 private static final int defaultWidth = 1200;
 	 private static final int defaultHeight = 800;
 	
-	public TurnPanel(int index, Player player) {
+	public TurnPanel(int index, Player player) throws IOException{
 		thisPlayer = player;
 		numbaOfTurns = player.getTurnNumber();
 		
@@ -40,7 +40,7 @@ public class TurnPanel extends JFrame implements ActionListener{
 		}
     }
 	
-	private void createMainPanel() {
+	private void createMainPanel() throws IOException{
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 		mainPanel.setBackground(new java.awt.Color(40,23,35));
         mainPanel.setPreferredSize(new Dimension(defaultWidth,defaultHeight - 120));
@@ -66,11 +66,11 @@ public class TurnPanel extends JFrame implements ActionListener{
   	  	add(mainPanel);
 	}
 	
-	private void addRolledDicePanel() {
-		
-		RolledDiePanel rolledDiePanel = new RolledDiePanel(thisPlayer, numbaOfTurns);
-		
+	private void addRolledDicePanel() throws IOException {
+
+		RolledDiePanel rolledDiePanel = new RolledDiePanel(thisPlayer , numbaOfTurns);
 		mainPanel.add(rolledDiePanel);
+	
 	}
 	
 	private void setUpEnterButton() {

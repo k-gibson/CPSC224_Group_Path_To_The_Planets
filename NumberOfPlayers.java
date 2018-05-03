@@ -114,17 +114,17 @@ public class NumberOfPlayers extends JFrame implements ActionListener{
     }
 
 	
-	private void createBackgroundImage() {
-		try {
-    		spaceImage = new SpaceImage("/Users/kategibson/eclipse-workspace/gameGUI/components/fancyStars.jpg");
-    		spaceImage.setPreferredSize(new Dimension(defaultWidth,defaultHeight));
-    		spaceImage.setBackground(new java.awt.Color(40,23,35));
-    		spaceImage.setBounds(0, 0, defaultWidth, defaultHeight); 
-    	} catch (IOException e) {
-    		JLabel oops = new JLabel("oops");
-    		this.add(oops);
-    	}
-		
-		finalPanel.add(spaceImage, JLayeredPane.DEFAULT_LAYER);
-	}
+	 private void createBackgroundImage() {
+			try {
+				spaceImage = new SpaceImage(8);
+				spaceImage.setPreferredSize(new Dimension(defaultWidth, defaultHeight));
+				spaceImage.setBackground(new java.awt.Color(40, 23, 35));
+				spaceImage.setBounds(0, 0, defaultWidth, defaultHeight);
+			} catch (IOException e) {
+				JLabel oops = new JLabel("oops");
+				this.add(oops);
+			}
+
+			finalPanel.add(spaceImage, JLayeredPane.DEFAULT_LAYER);
+		}
 }

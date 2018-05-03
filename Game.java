@@ -41,7 +41,7 @@ public class Game extends Space{
     * Begins a game of Yahtzee and at the end asks the user if they would like to play again
     */
   public void playGame(){
-	  final int ROUNDS = 6;
+	  final int ROUNDS = 2;
 	  CompletedListener completedListener = new CompletedListener() {
   			@Override
   			public void completed(Object data) {
@@ -80,7 +80,7 @@ public class Game extends Space{
     	  currentLeader = players[i];
       }
     }
-    WinFrame winFrame = new WinFrame(currentLeader);
+    WinFrame winFrame = new WinFrame(currentLeader, players);
 	winFrame.setVisible(true);
   }
 }

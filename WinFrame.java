@@ -10,52 +10,56 @@ public class WinFrame extends JFrame implements ActionListener{
 		private JLayeredPane finalPanel = getLayeredPane();
 		private JPanel mainPanel = new JPanel();
 		private JPanel spaceImage;
-		private JButton doneButton = new JButton("DONE");
+		private JButton scoreCardButton = new JButton("SEE SCORECARD");
 		private Player player;
+		private Player[] players;
 		
 		 private static final int defaultWidth = 1200;
 		 private static final int defaultHeight = 800;
 		
-		public WinFrame(Player player) {
+		public WinFrame(Player player, Player[] players) {
 			this.player = player;
+			this.players = players;
 			createWinScreen();
 		}
 		
 		private void createWinScreen() {
 			setSize(defaultWidth, defaultHeight);
 			createBackgroundImage();
-			//addButtonsPanel();
+			
 			createMainPanel();
 		}
 		
 		private void addButtonsPanel() {
-			setUpDoneButton();	
-		    JPanel mainButtonPanel = new JPanel();
-		    mainButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		    mainButtonPanel.setBackground(new java.awt.Color(40,23,35));
-		    mainButtonPanel.add(doneButton);
-		    this.add(mainButtonPanel,BorderLayout.NORTH);
+			setUpScoreCardButton();
+			JPanel mainButtonPanel = new JPanel();
+	        mainButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+	        mainButtonPanel.setBackground(new java.awt.Color(40,23,35));
+	        mainButtonPanel.add(scoreCardButton);
+	        finalPanel.add(mainButtonPanel,JLayeredPane.POPUP_LAYER);
 		 }
 		 
-		 private void setUpDoneButton() {
-			 doneButton.setOpaque(true);
-		     doneButton.setFont(new Font("Krungthep",Font.BOLD,25));
-		     doneButton.setBackground(new Color(67,39,59));
-		     doneButton.setForeground(Color.WHITE);
-		     doneButton.setFocusPainted(false);
-		     doneButton.setBorderPainted(false);
-		     doneButton.addActionListener(this);
+		 private void setUpScoreCardButton() {
+			 scoreCardButton.setOpaque(true);
+		     scoreCardButton.setFont(new Font("Krungthep",Font.BOLD,20));
+		     scoreCardButton.setBackground(new Color(67,39,59));
+		     scoreCardButton.setForeground(Color.WHITE);
+		     scoreCardButton.setFocusPainted(false);
+		     scoreCardButton.setBorderPainted(false);
+		        
+		     scoreCardButton.addActionListener(this); 
 		 }
 		 
 		 public void actionPerformed(ActionEvent e) {
-			// FinalScorecardPanel finalScorecard = new FinalScorecardPanel(players);
-			 
+			FinalScorecardPanel finalScorecard = new FinalScorecardPanel(players);
+			finalScorecard.setVisible(true);
 		 }
 		
 		private void createMainPanel() {
 			mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 			mainPanel.setBackground(new java.awt.Color(40,23,35));
 	        mainPanel.setPreferredSize(new Dimension(defaultWidth,defaultHeight - 120));
+	        addButtonsPanel();
 	        
 	     	//define a blank space for formatting purposes
 	        Filler space = new Filler(new Dimension(0, 80), new Dimension(0, 80), new Dimension(Short.MAX_VALUE, 80));
@@ -96,15 +100,15 @@ public class WinFrame extends JFrame implements ActionListener{
 		
 		private void createBackgroundImage() {
 			try {
-	    		spaceImage = new SpaceImage("/Users/kategibson/eclipse-workspace/gameGUI/components/stars.jpg");
-	    		spaceImage.setPreferredSize(new Dimension(defaultWidth,defaultHeight - 120));
-	    		spaceImage.setBackground(new java.awt.Color(40,23,35));
-	    		spaceImage.setBounds(0, 0, defaultWidth, defaultHeight); 
-	    	} catch (IOException e) {
-	    		JLabel oops = new JLabel("oops");
-	    		this.add(oops);
-	    	}
-			
+				spaceImage = new SpaceImage(7);
+				spaceImage.setPreferredSize(new Dimension(defaultWidth, defaultHeight - 120));
+				spaceImage.setBackground(new java.awt.Color(40, 23, 35));
+				spaceImage.setBounds(0, 0, defaultWidth, defaultHeight);
+			} catch (IOException e) {
+				JLabel oops = new JLabel("oops");
+				this.add(oops);
+			}
+
 			finalPanel.add(spaceImage, JLayeredPane.DEFAULT_LAYER);
 		}
 }

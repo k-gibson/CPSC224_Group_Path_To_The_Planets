@@ -36,9 +36,13 @@ public class RollPanel extends JFrame implements ActionListener {
 		Object[] datas = new Object[] {index, currentRound};
 		completedListener.completed(datas);
 
+		try {
 		TurnPanel thisTurn = new TurnPanel(index, thisPlayer);
 		thisTurn.setVisible(true);
 		this.setVisible(false);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
     }
 	
 	private void createRollScreen(Player player) {
@@ -92,15 +96,15 @@ public class RollPanel extends JFrame implements ActionListener {
 	
 	private void createBackgroundImage() {
 		try {
-    		spaceImage = new SpaceImage("/Users/kategibson/eclipse-workspace/gameGUI/components/stars.jpg");
-    		spaceImage.setPreferredSize(new Dimension(defaultWidth,defaultHeight - 120));
-    		spaceImage.setBackground(new java.awt.Color(40,23,35));
-    		spaceImage.setBounds(0, 0, defaultWidth, defaultHeight); 
-    	} catch (IOException e) {
-    		JLabel oops = new JLabel("oops");
-    		this.add(oops);
-    	}
-		
+		 spaceImage = new SpaceImage(7);
+		 spaceImage.setPreferredSize(new Dimension(defaultWidth, defaultHeight));
+		 spaceImage.setBackground(new java.awt.Color(40, 23, 35));
+		 spaceImage.setBounds(0, 0, defaultWidth, defaultHeight);
+		} catch (IOException e) {
+		 JLabel oops = new JLabel("oops");
+		 this.add(oops);
+		}
+	
 		finalPanel.add(spaceImage, JLayeredPane.DEFAULT_LAYER);
 	}
 }

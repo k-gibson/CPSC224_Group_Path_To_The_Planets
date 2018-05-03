@@ -1,28 +1,48 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
-import java.io.File;
+
 import java.io.IOException;
 
 public class SpaceImage extends JPanel {
 
-  private Image backgroundImage;
+	private Image backgroundImage;
+	private SpaceImageObject imageObject;
 
-  public SpaceImage(String fileName) throws IOException {
-    backgroundImage = ImageIO.read(new File(fileName));
-    Dimension size = new Dimension(backgroundImage.getWidth(null), backgroundImage.getHeight(null));
-    setPreferredSize(size);
-    setMinimumSize(size);
-    setMaximumSize(size);
-    setSize(size);
-    setLayout(null);
-  }
+	public SpaceImage(int fileIndex) throws IOException {
+		imageObject = new SpaceImageObject(fileIndex);
+	}
+	
+	public class SpaceImageObject extends FileLoader{
+			
+			private SpaceImageObject(int imageIndex) throws IOException{
+				backgroundImage = loadImage(imageIndex);
+				spaceImageFormatting();
+			}
+			
+			
+			public void spaceImageFormatting(){
+				Dimension size = new Dimension(backgroundImage.getWidth(null), backgroundImage.getHeight(null));
+				setPreferredSize(size);
+				setMinimumSize(size);
+				setMaximumSize(size);
+				setSize(size);
+				setLayout(null);
+			}
+	}
 
-  public void paintComponent(Graphics graphics) {
-    super.paintComponent(graphics);
+	public Image getImage() {
+		
+		Image returnImg;
+		returnImg = backgroundImage;
 
-    // Draw the background image.
-    graphics.drawImage(backgroundImage, 0, 0, this);
-  }
+		return returnImg;
+	} 
+	
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+
+		// Draw the background image.
+		g.drawImage(backgroundImage, 0, 0, this);
+	}
 }

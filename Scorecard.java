@@ -41,7 +41,7 @@ public class Scorecard {
     largeStraight = 0;
     hasNotScored = true;
     upperCardScores = new int[numberOfSides];
-    scored = new boolean[numberOfSides];
+    scored = new boolean[10];
   }
 
   /**
@@ -52,53 +52,74 @@ public class Scorecard {
 	  
     // reset boolean array to false to check what has been scored this turn
 	int diceScored = 0;
-    for (int i = 0; i < numberOfDice; i++){
-      scored[i] = false;
-    }
+    
     if(dice[0].getValue()== Die.Planet.MERCURY){
       upperCardScores[0] = 7;
-      scored[0] = true;
+      if(!scored[0]){
+    	  totalScore = totalScore + 7;
+    	  scored[0] = true;
+      }
       hasNotScored = false;
       diceScored++;
     }
     if(dice[1].getValue()==Die.Planet.VENUS){
       upperCardScores[1] = 8;
-      scored[0] = true;
+      if(!scored[1]){
+    	  totalScore = totalScore + 8;
+    	  scored[1] = true;
+      }
       hasNotScored = false;
       diceScored++;
     }
     if(dice[2].getValue()==Die.Planet.MARS) {
       upperCardScores[2] = 9;
-      scored[0] = true;
+      if(!scored[2]){
+    	  totalScore = totalScore + 9;
+    	  scored[2] = true;
+      }
       hasNotScored = false;
       diceScored++;
     }
     if(dice[3].getValue()==Die.Planet.JUPITER) {
       upperCardScores[3] = 10;
-      scored[0] = true;
+      if(!scored[3]){
+    	  totalScore = totalScore + 10;
+    	  scored[3] = true;
+      }
       hasNotScored = false;
       diceScored++;
     }
     if(dice[4].getValue()==Die.Planet.SATURN) {
       upperCardScores[4] = 11;
-      scored[0] = true;
+      if(!scored[4]){
+    	  totalScore = totalScore + 11;
+    	  scored[4] = true;
+      }
       hasNotScored = false;
       diceScored++;
     }
     if(dice[5].getValue()==Die.Planet.URANUS) {
       upperCardScores[5] = 12;
-      scored[0] = true;
+      if(!scored[5]){
+    	  totalScore = totalScore + 12;
+    	  scored[5] = true;
+      }
       hasNotScored = false;
       diceScored++;
     }
     if(dice[6].getValue().equals(Die.Planet.NEPTUNE)) {
       upperCardScores[6] = 13;
-      scored[0] = true;
+      if(!scored[6]){
+    	  totalScore = totalScore + 13;
+    	  scored[6] = true;
+      }
       hasNotScored = false;
       diceScored++;
     }
-    if(diceScored == 3) {
+    if(diceScored == 3 && !scored[7]) {
+    	scored[7] = true;
     	triForce = 33;
+    	totalScore = totalScore + 33;
     }
   }
 
@@ -109,15 +130,19 @@ public class Scorecard {
   public void bonusScores(){
 	boolean straightFound = false;
     if(smallStraight == 0){
-      if(maxStraightFound() == 2){
+      if(maxStraightFound() == 2 && !scored[8]){
         smallStraight = 30;
+        scored[8] = true;
+        totalScore = totalScore + 30;
         straightFound = true;
       }
     }
 
     if(largeStraight == 0){
-      if(maxStraightFound() == 3 && !straightFound){
+      if(maxStraightFound() == 3 && !straightFound && !scored[9]){
         largeStraight = 50;
+        scored[9] = true;
+        totalScore = totalScore + 50;
       }
     }
   }
@@ -172,15 +197,11 @@ public class Scorecard {
     System.out.println("NEPTUNE: " + upperCardScores[5]);
     System.out.println("URANUS: " + upperCardScores[6]);
 
-    for(int i = 0; i < numberOfDice; i++){
-      this.totalScore += upperCardScores[i];
-    }
     // LOWER SCORECARD
 
    // small straight line
    if(smallStraight > 0){
      System.out.println("Small Straight: " + smallStraight);
-     this.totalScore += smallStraight;
    }else{
      System.out.println("Small Straight: 0");
    }
@@ -188,10 +209,11 @@ public class Scorecard {
    // large straight line
    if(largeStraight > 0){
      System.out.println("Large Straight: " + largeStraight);
-     this.totalScore += largeStraight;
    }else{
      System.out.println("Large Straight: 0");
    }
+   
+   System.out.println("Total Score in the scorecard: " + totalScore);
 
   // Display total score
   System.out.println("TOTAL SCORE: " + totalScore);

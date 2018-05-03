@@ -29,23 +29,15 @@ public class WinFrame extends JFrame implements ActionListener{
 			
 			createMainPanel();
 		}
-		
-		private void addButtonsPanel() {
-			setUpScoreCardButton();
-			JPanel mainButtonPanel = new JPanel();
-	        mainButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-	        mainButtonPanel.setBackground(new java.awt.Color(40,23,35));
-	        mainButtonPanel.add(scoreCardButton);
-	        finalPanel.add(mainButtonPanel,JLayeredPane.POPUP_LAYER);
-		 }
 		 
 		 private void setUpScoreCardButton() {
 			 scoreCardButton.setOpaque(true);
-		     scoreCardButton.setFont(new Font("Krungthep",Font.BOLD,20));
+		     scoreCardButton.setFont(new Font("Krungthep",Font.BOLD,25));
 		     scoreCardButton.setBackground(new Color(67,39,59));
 		     scoreCardButton.setForeground(Color.WHITE);
 		     scoreCardButton.setFocusPainted(false);
 		     scoreCardButton.setBorderPainted(false);
+		     scoreCardButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		        
 		     scoreCardButton.addActionListener(this); 
 		 }
@@ -59,7 +51,6 @@ public class WinFrame extends JFrame implements ActionListener{
 			mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 			mainPanel.setBackground(new java.awt.Color(40,23,35));
 	        mainPanel.setPreferredSize(new Dimension(defaultWidth,defaultHeight - 120));
-	        addButtonsPanel();
 	        
 	     	//define a blank space for formatting purposes
 	        Filler space = new Filler(new Dimension(0, 80), new Dimension(0, 80), new Dimension(Short.MAX_VALUE, 80));
@@ -85,6 +76,9 @@ public class WinFrame extends JFrame implements ActionListener{
 	  	  	greeting.add(greetingShadow, BorderLayout.NORTH);
 	        
 	  	  	mainPanel.add(greeting, BorderLayout.NORTH);
+	  	  	setUpScoreCardButton();
+	  	  	mainPanel.add(scoreCardButton);
+	  	  	
 	  	  	DrawStarShape star = new DrawStarShape();
 	  	  	
 	  	  	mainPanel.add(star);

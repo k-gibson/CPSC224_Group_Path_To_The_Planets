@@ -22,9 +22,7 @@ public class Player{
 		playerHand = new Die[numDice];
 		playerName = Integer.toString(playerNumber);
 		playerCard = new Scorecard(playerHand);
-
 	}
-	
 
 	public void takeTurn(Player player){
 		for(int i = 0; i < numDice; i++){
@@ -62,15 +60,8 @@ public class Player{
     player.playerCard.upperScoreCard();
     player.playerCard.bonusScores();
     if(player.playerCard.checkForWinner()){
-    	// Create a new panel that prints out "Congrats, you won."
-    	WinFrame winnerPanel = new WinFrame();
       winnerFound = true;
     }
     return winnerFound;
-  }
-
-  public void finalScore(Player player){
-	  // No GUI needed for this function, it will be called in the displayScorecard function in Scorecard class
-    player.playerCard.displayScorecard(player);
   }
 }

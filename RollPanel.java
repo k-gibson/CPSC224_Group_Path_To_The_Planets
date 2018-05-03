@@ -20,9 +20,12 @@ public class RollPanel extends JFrame implements ActionListener {
 	private Player thisPlayer;
 	
 	private Integer index = 0;
-	public RollPanel(Player player, Integer index, CompletedListener completedListener) { //, CompletedListener completedListener) {
+	private Integer currentRound = 0;
+	
+	public RollPanel(Player player, Integer index, Integer currentRound, CompletedListener completedListener) { //, CompletedListener completedListener) {
 		this.completedListener = completedListener;
 		this.index = index;
+		this.currentRound = currentRound;
 		thisPlayer = player;
 		createRollScreen(player);
 		this.setVisible(true);
@@ -30,7 +33,8 @@ public class RollPanel extends JFrame implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		completedListener.completed(index);
+		Object[] datas = new Object[] {index, currentRound};
+		completedListener.completed(datas);
 
 		TurnPanel thisTurn = new TurnPanel(index, thisPlayer);
 		thisTurn.setVisible(true);

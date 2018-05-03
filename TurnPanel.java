@@ -18,12 +18,12 @@ public class TurnPanel extends JFrame implements ActionListener{
 	 private static final int defaultWidth = 1200;
 	 private static final int defaultHeight = 800;
 	
-	public TurnPanel(int numberOfTurns, Player player) {
+	public TurnPanel(int index, Player player) {
 		thisPlayer = player;
-		numbaOfTurns = numberOfTurns;
+		numbaOfTurns = player.getTurnNumber();
 		
 		setSize(defaultWidth, defaultHeight);
-		createMainPanel(numberOfTurns);
+		createMainPanel();
 		this.setTitle("Race Through Space");
 		this.setVisible(true);
 	}
@@ -40,7 +40,7 @@ public class TurnPanel extends JFrame implements ActionListener{
 		}
     }
 	
-	private void createMainPanel(int numberOfTurns) {
+	private void createMainPanel() {
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 		mainPanel.setBackground(new java.awt.Color(40,23,35));
         mainPanel.setPreferredSize(new Dimension(defaultWidth,defaultHeight - 120));

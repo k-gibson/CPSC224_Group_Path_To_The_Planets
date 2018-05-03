@@ -24,62 +24,45 @@ public class Game extends Space{
   public int numberOfRolls = 7;
   public int numberOfPlayers;
 
-
   /**
   * Yahtzee constructor stores an array of dice used to play the game
   */
   public Game(int numberOfPlayers){
-    //System.out.println("How many player are there? ");
     // Call get number of players panel class which returns numberOfPlayers
 	  
 	  this.numberOfPlayers = numberOfPlayers;
-	  // set the numbers of players later
- //input.nextInt(); //input.nextInt becomes call to getPlayer panel class
     players = new Player[numberOfPlayers];
     for(int i = 0; i < numberOfPlayers; i++){
-      //create new panel to input the users name panel returns user name
-      //System.out.print("Player Name: ");
-    	//*************** need function in NumberOfPlayers to get player names
-    	// return the array of players? Or just one player
       players[i] = new Player(i + 1);
-    }
-    
-    
-    
-    
+    }   
   }
 
   /**
     * Begins a game of Yahtzee and at the end asks the user if they would like to play again
     */
   public void playGame(){
+	  final int ROUNDS = 6;
 	  CompletedListener completedListener = new CompletedListener() {
   			@Override
   			public void completed(Object data) {
-  				Integer index = (Integer)data;
-  					
-  				// after the roll panel we need a panel to display the dice.
-  				// this should be in the takeTurn function in the Player class
+  				Object[] datas = (Object[]) data;
+  				Integer index = (Integer)datas[0];
+  				Integer currentTurn = (Integer)datas[1];
   				players[index].takeTurn(players[index]);
+  				if(players[index].score(players[index])) {
+  				    endGame();
+  					return;
+  				}
   				if(!players[index].score(players[index]) && index + 1 < players.length){
-  					new RollPanel(players[index + 1], index + 1, this);
+  					new RollPanel(players[index + 1], index + 1, currentTurn, this);
+  				} else if (currentTurn < ROUNDS) {
+  			  		new RollPanel(players[0], 0, currentTurn+1, this);
+  				} else {
+  					endGame();
   				}
   			}
   		};
-  	
-  	new RollPanel(players[0], 0, completedListener);
-//    int numberOfTurns = 0;
-//    while (numberOfTurns <= 7 && !winnerFound)
-//    {
-//
-//      if(winnerFound) break;
-//      // call panel to display the turn number.
-//      TurnPanel turnPanel = new TurnPanel(numberOfTurns);
-//      turnPanel.setVisible(true);
-//      //System.out.println("-------------------------TURN " + numberOfTurns + "------------------------");
-//      numberOfTurns++;
-//    }
-//    endGame();
+  		new RollPanel(players[0], 0, 0, completedListener);
   }
 
     /**
@@ -87,9 +70,17 @@ public class Game extends Space{
       */
   private void endGame(){
     //hand need to be sorted to check for straights
-    for(int i = 0; i < numberOfPlayers; i++){
-      players[i].finalScore(players[i]);
-      
+	Player currentLeader = players[0];
+    for(int i = 0; i < players.length; i++){
+      if(players[i].score(players[i])) {
+  		currentLeader = players[i];
+  		break;
+  	  } 
+      else if(players[i].playerCard.totalScore > currentLeader.playerCard.totalScore) {
+    	  currentLeader = players[i];
+      }
     }
+    WinFrame winFrame = new WinFrame(currentLeader);
+	winFrame.setVisible(true);
   }
 }

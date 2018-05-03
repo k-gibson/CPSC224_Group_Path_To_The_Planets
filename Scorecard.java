@@ -173,14 +173,14 @@ public class Scorecard {
     System.out.println("URANUS: " + upperCardScores[6]);
 
     for(int i = 0; i < numberOfDice; i++){
-      totalScore += upperCardScores[i];
+      this.totalScore += upperCardScores[i];
     }
     // LOWER SCORECARD
 
    // small straight line
    if(smallStraight > 0){
      System.out.println("Small Straight: " + smallStraight);
-     totalScore += smallStraight;
+     this.totalScore += smallStraight;
    }else{
      System.out.println("Small Straight: 0");
    }
@@ -188,7 +188,7 @@ public class Scorecard {
    // large straight line
    if(largeStraight > 0){
      System.out.println("Large Straight: " + largeStraight);
-     totalScore += largeStraight;
+     this.totalScore += largeStraight;
    }else{
      System.out.println("Large Straight: 0");
    }

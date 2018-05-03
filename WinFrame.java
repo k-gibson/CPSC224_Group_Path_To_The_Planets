@@ -1,26 +1,56 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.swing.*;
 import javax.swing.Box.*;
 
-public class WinFrame extends JFrame {
+public class WinFrame extends JFrame implements ActionListener{
 		private JLayeredPane finalPanel = getLayeredPane();
 		private JPanel mainPanel = new JPanel();
 		private JPanel spaceImage;
+		private JButton doneButton = new JButton("DONE");
+		private Player player;
 		
 		 private static final int defaultWidth = 1200;
 		 private static final int defaultHeight = 800;
 		
-		public WinFrame() {
+		public WinFrame(Player player) {
+			this.player = player;
 			createWinScreen();
 		}
 		
 		private void createWinScreen() {
 			setSize(defaultWidth, defaultHeight);
 			createBackgroundImage();
+			//addButtonsPanel();
 			createMainPanel();
 		}
+		
+		private void addButtonsPanel() {
+			setUpDoneButton();	
+		    JPanel mainButtonPanel = new JPanel();
+		    mainButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		    mainButtonPanel.setBackground(new java.awt.Color(40,23,35));
+		    mainButtonPanel.add(doneButton);
+		    this.add(mainButtonPanel,BorderLayout.NORTH);
+		 }
+		 
+		 private void setUpDoneButton() {
+			 doneButton.setOpaque(true);
+		     doneButton.setFont(new Font("Krungthep",Font.BOLD,25));
+		     doneButton.setBackground(new Color(67,39,59));
+		     doneButton.setForeground(Color.WHITE);
+		     doneButton.setFocusPainted(false);
+		     doneButton.setBorderPainted(false);
+		     doneButton.addActionListener(this);
+		 }
+		 
+		 public void actionPerformed(ActionEvent e) {
+			// FinalScorecardPanel finalScorecard = new FinalScorecardPanel(players);
+			 
+		 }
 		
 		private void createMainPanel() {
 			mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
@@ -33,7 +63,7 @@ public class WinFrame extends JFrame {
 	  	    space.setOpaque(false);
 	  	    mainPanel.add(space);
 	        
-	        JLabel congratulations = new JLabel("Congratulations");
+	        JLabel congratulations = new JLabel("Congratulations Player " + player.playerName);
 	        congratulations.setFont(new Font("Krungthep",1,35));
 	        congratulations.setForeground(Color.white);
 	        congratulations.setAlignmentX(Component.CENTER_ALIGNMENT);

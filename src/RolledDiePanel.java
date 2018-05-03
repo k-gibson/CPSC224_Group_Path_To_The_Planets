@@ -127,8 +127,6 @@ public class RolledDiePanel extends JPanel {
 			JLabel p = new JLabel(s);
 			p.setFont(new Font("Krungthep", 1, 25));
 			p.setForeground(Color.white);
-			wordsPanel.add(travelLabelx);
-			
 			wordsPanel.add(p);
 			wordsPanel.setVisible(true);
 		}

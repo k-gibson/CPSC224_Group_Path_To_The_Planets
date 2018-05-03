@@ -24,6 +24,7 @@ public class Scorecard {
   boolean hasNotScored;
   public int[] upperCardScores;
   boolean[] scored;
+  boolean[] scoredThisTurn;
   Die[] dice;
 
 
@@ -42,20 +43,30 @@ public class Scorecard {
     hasNotScored = true;
     upperCardScores = new int[numberOfSides];
     scored = new boolean[10];
+    scoredThisTurn= new boolean[numberOfDice];
+    
+    for(int i = 0; i < scored.length; i++){
+    	scored[i] = false;
+    }
   }
 
   /**
   * Scores the planet part of the scorecard and tracks what has been scored in the boolean array hasBeenScored
   */
-  public void upperScoreCard(){
+  public void upperScoreCard(){	  
     // reset boolean array to false to check what has been scored this turn
+	  for(int i = 0; i < scoredThisTurn.length; i++){
+		  scoredThisTurn[i] = false;
+	  }
+	  
 	int diceScored = 0;
-    
     if(dice[0].getValue()== Die.Planet.MERCURY){
       upperCardScores[0] = 7;
       if(!scored[0]){
     	totalScore = totalScore + 7;
     	scored[0] = true;
+    	scoredThisTurn[0] = true;
+    	System.out.println("scoredThisTurn" + scoredThisTurn[0]);
       }
       hasNotScored = false;
       diceScored++;
@@ -65,7 +76,8 @@ public class Scorecard {
       if(!scored[1]){
       	totalScore = totalScore + 8;
       	scored[1] = true;
-        }
+      	scoredThisTurn[1] = true;
+       }
       hasNotScored = false;
       diceScored++;
     }
@@ -74,7 +86,8 @@ public class Scorecard {
       if(!scored[2]){
       	totalScore = totalScore + 9;
       	scored[2] = true;
-        }
+      	scoredThisTurn[2] = true;
+      }
       hasNotScored = false;
       diceScored++;
     }
@@ -83,7 +96,8 @@ public class Scorecard {
       if(!scored[3]){
       	totalScore = totalScore + 10;
       	scored[3] = true;
-        }
+      	scoredThisTurn[3] = true;
+      }
       hasNotScored = false;
       diceScored++;
     }
@@ -92,7 +106,8 @@ public class Scorecard {
       if(!scored[4]){
       	totalScore = totalScore + 11;
       	scored[4] = true;
-        }
+      	scoredThisTurn[4] = true;
+      }
       hasNotScored = false;
       diceScored++;
     }
@@ -101,7 +116,8 @@ public class Scorecard {
       if(!scored[5]){
       	totalScore = totalScore + 12;
       	scored[5] = true;
-        }
+      	scoredThisTurn[5] = true;
+      }
       hasNotScored = false;
       diceScored++;
     }
@@ -110,7 +126,8 @@ public class Scorecard {
       if(!scored[6]){
       	totalScore = totalScore + 13;
       	scored[6] = true;
-        }
+      	scoredThisTurn[6] = true;
+      }
       hasNotScored = false;
       diceScored++;
     }
@@ -126,18 +143,37 @@ public class Scorecard {
   * Scores the small straight and large straight
   */
   public void bonusScores(){
-	boolean straightFound = false;
+	  int maxStraight = 0;
+	  for(int i = 0; i < numberOfDice-2; i++){
+    	if(scoredThisTurn[i]){
+    		if(scoredThisTurn[i+1]){
+    			if(scoredThisTurn[i+2]){
+    				maxStraight = 3;
+    				break;
+    			}else{
+    				maxStraight = 2;
+    				break;
+    			}
+    		}else{
+    			maxStraight = 0;
+    		}
+    	 }
+      }
+	  // last case that isn't covered by the for loop so you don't leave the array bounds
+	  if(scoredThisTurn[5] && scoredThisTurn[6]){
+		  maxStraight = 2;
+	  }
+	  
     if(smallStraight == 0){
-    	if(maxStraightFound() == 2 && !scored[8]){
+    	if(maxStraight == 2 && !scored[8]){
         smallStraight = 30;
         scored[8] = true;
         totalScore = totalScore + 30;
-        straightFound = true;
       }
     }
 
     if(largeStraight == 0){
-    	if(maxStraightFound() == 3 && !straightFound && !scored[9]){
+    	if(maxStraight == 3 && !scored[9]){
         largeStraight = 50;
         scored[9] = true;
         totalScore = totalScore + 50;
@@ -150,16 +186,19 @@ public class Scorecard {
    * Checks the array of dice to find the longest straight that has been rolled
    * @return int maxStraight
    */
-    private int maxStraightFound(){
-      int maxStraight = 0;
+    private int maxStraightFound(int maxStraight){
       for(int i = 0; i < numberOfDice; i++){
-        if(scored[i]){
+    	  System.out.println("maxStraight = " + maxStraight + scoredThisTurn[i]);
+        if(scoredThisTurn[i]){
           maxStraight++;
         }
         else
+        	if(maxStraight > 1){
+        		return maxStraight;
+        	}
           maxStraight = 0;
       }
-     return maxStraight; 
+     return maxStraight;
     }
 
     /**

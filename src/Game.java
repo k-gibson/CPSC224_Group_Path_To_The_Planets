@@ -6,15 +6,11 @@
 * CPSC 224-01, Spring 2018
 * Programming Assignment #6
 * class Yahtzee.java
-* @author Alana Dillinger
+* @author Alana Dillinger and Kathrine Gibson
 * @version v1.0 3/23/2018
 */
 
 import java.util.*;
-
-import javax.swing.JPanel;
-
-import java.io.*;
 
 public class Game extends Space{
   Scanner input = new Scanner(System.in);

@@ -67,10 +67,8 @@ public class TurnPanel extends JFrame implements ActionListener{
 	}
 	
 	private void addRolledDicePanel() throws IOException {
-
 		RolledDiePanel rolledDiePanel = new RolledDiePanel(thisPlayer , numbaOfTurns);
 		mainPanel.add(rolledDiePanel);
-	
 	}
 	
 	private void setUpEnterButton() {

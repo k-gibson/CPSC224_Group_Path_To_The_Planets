@@ -106,8 +106,7 @@ public class NumberOfPlayers extends JFrame implements ActionListener{
        		 hasUserInput = false;
        	 }
        	this.completedListener.completed(numberOfPlayers);
-       	 
-       	 System.out.println(numberOfPlayers);
+       	
        	 if (hasUserInput) {
        		 this.setVisible(false);
        	}

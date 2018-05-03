@@ -6,8 +6,6 @@
  *  @version v1.0
  *
  */
-import java.util.ArrayList;
-
 
 public class Player{
 
@@ -31,28 +29,12 @@ public class Player{
 		for(int i = 0; i < numDice; i++){
 			this.playerHand[i].roll(7);
 		}
-		// instead of calling displayHand, we can call new panel to display roll
-			displayHand(player); //DISPLAYROLL PANEL HERE
 			turn++;
 			System.out.println("");
 	}
 	
 	public int getTurnNumber() {
 		return turn;
-	}
-
-	private void displayHand(Player player){
-		// This will all be GUI
-		// We can get rid of this function and call a DisplayRoll panel which shows 7 dice with the planet rolled on each
-		System.out.println(player.playerName + " rolled:");
-
-		System.out.println("Mercury die: " + this.playerHand[0].getValue());
-		System.out.println("Venus die: " + this.playerHand[1].getValue());
-		System.out.println("Mars die: " + this.playerHand[2].getValue());
-		System.out.println("Jupiter die: " + this.playerHand[3].getValue());
-		System.out.println("Saturn die: " + this.playerHand[4].getValue());
-		System.out.println("Uranus die: " + this.playerHand[5].getValue());
-		System.out.println("Neptune die: " + this.playerHand[6].getValue());
 	}
 
   public boolean score(Player player){

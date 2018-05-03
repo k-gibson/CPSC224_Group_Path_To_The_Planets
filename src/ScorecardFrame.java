@@ -2,8 +2,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import java.awt.*;
-import java.awt.Graphics;
-import java.awt.geom.*;
 import java.awt.event.*;
 
 
@@ -11,7 +9,6 @@ import java.awt.event.*;
 public class ScorecardFrame extends JFrame implements ActionListener {
 	private static final int defaultWidth = 1200;
     private static final int defaultHeight = 800;
-    private static final int scoreLineHeight = defaultHeight/15;
     
     private JButton nextButton = new JButton("Done");
     private JPanel cardPanel = new JPanel();
@@ -67,7 +64,6 @@ public class ScorecardFrame extends JFrame implements ActionListener {
         String[] stringScores = new String[upperCardScores.length];
         for(int i=0; i < upperCardScores.length; i++) {
         	stringScores[i] = String.valueOf(upperCardScores[i]);
-        	System.out.println(upperCardScores.length);
         }
         //planet labels
         JPanel scoresPanel = new JPanel();
@@ -116,7 +112,6 @@ public class ScorecardFrame extends JFrame implements ActionListener {
         table.setRowHeight(9,rowHeight);
         table.setRowHeight(10,rowHeight);
         table.setRowHeight(11,rowHeight);
-        
         
         scoresPanel.add(table);
         returnPanel.add(scoresPanel,BorderLayout.NORTH);

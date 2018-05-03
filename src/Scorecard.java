@@ -48,8 +48,6 @@ public class Scorecard {
   * Scores the planet part of the scorecard and tracks what has been scored in the boolean array hasBeenScored
   */
   public void upperScoreCard(){
-	// No GUI needed in this function... I think  
-	  
     // reset boolean array to false to check what has been scored this turn
 	int diceScored = 0;
     
@@ -161,7 +159,7 @@ public class Scorecard {
         else
           maxStraight = 0;
       }
-     return maxStraight; //<--- not sure
+     return maxStraight; 
     }
 
     /**
@@ -169,51 +167,10 @@ public class Scorecard {
      * @return boolean
      */
     public boolean checkForWinner(){
-      // No GUI
       for(int i = 0; i < numberOfDice; i++){
         if(upperCardScores[i]==0)
           return false;
       }
       return true;
     }
-
-
-  /**
-    * This will become a call to the GUI for the scorecard panel
-    */
-  public void displayScorecard(Player player){
-	// We can replace all of this with a call to a Scorecard panel
-	// except the loop to count the total
-	// Pass the array UpperCardScores, smallStraight, largeStraight, and totalScore to the Scorecard panel
-
-    System.out.println("    FINAL SCORECARD " + player.playerName);
-    System.out.println("--------------------------");
-    // UPPER SCORECARD
-    System.out.println("MERCURY: " + upperCardScores[0]);
-    System.out.println("VENUS: " + upperCardScores[1]);
-    System.out.println("MARS: " + upperCardScores[2]);
-    System.out.println("JUPITER: " + upperCardScores[3]);
-    System.out.println("SATURN: " + upperCardScores[4]);
-    System.out.println("NEPTUNE: " + upperCardScores[5]);
-    System.out.println("URANUS: " + upperCardScores[6]);
-
-    // LOWER SCORECARD
-
-   // small straight line
-   if(smallStraight > 0){
-     System.out.println("Small Straight: " + smallStraight);
-   }else{
-     System.out.println("Small Straight: 0");
-   }
-
-   // large straight line
-   if(largeStraight > 0){
-     System.out.println("Large Straight: " + largeStraight);
-   }else{
-     System.out.println("Large Straight: 0");
-   }
-
-  // Display total score
-  System.out.println("TOTAL SCORE: " + totalScore);
-  }
 }

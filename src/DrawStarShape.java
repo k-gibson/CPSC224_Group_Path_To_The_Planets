@@ -5,7 +5,6 @@ import javax.swing.JPanel;
 public class DrawStarShape extends JPanel {
 	
 	public DrawStarShape() {
-	    //setMinimumSize(new Dimension(500,500));
 		Dimension size = new Dimension(220, 290);
 	    setMaximumSize(size);
 	    setLayout(null);

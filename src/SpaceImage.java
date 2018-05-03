@@ -7,10 +7,9 @@ import java.io.IOException;
 public class SpaceImage extends JPanel {
 
 	private Image backgroundImage;
-	private SpaceImageObject imageObject;
 
 	public SpaceImage(int fileIndex) throws IOException {
-		imageObject = new SpaceImageObject(fileIndex);
+		new SpaceImageObject(fileIndex);
 	}
 	
 	public class SpaceImageObject extends FileLoader{
@@ -19,7 +18,6 @@ public class SpaceImage extends JPanel {
 				backgroundImage = loadImage(imageIndex);
 				spaceImageFormatting();
 			}
-			
 			
 			public void spaceImageFormatting(){
 				Dimension size = new Dimension(backgroundImage.getWidth(null), backgroundImage.getHeight(null));
@@ -32,7 +30,6 @@ public class SpaceImage extends JPanel {
 	}
 
 	public Image getImage() {
-		
 		Image returnImg;
 		returnImg = backgroundImage;
 
@@ -41,7 +38,6 @@ public class SpaceImage extends JPanel {
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
 		// Draw the background image.
 		g.drawImage(backgroundImage, 0, 0, this);
 	}

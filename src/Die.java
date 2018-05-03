@@ -22,7 +22,6 @@ public class Die{
   * Die is used and called by Yahtzee
   */
   public Die() {
-    Planet planet;
     rand = new Random();
   }
 

@@ -4,8 +4,6 @@ import javax.swing.Box.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class RollPanel extends JFrame implements ActionListener {
 	private JLayeredPane finalPanel = getLayeredPane();

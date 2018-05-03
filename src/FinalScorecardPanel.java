@@ -1,10 +1,7 @@
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
 
 import java.awt.*;
 import java.awt.event.*;
-
-
 
 public class FinalScorecardPanel extends JFrame implements ActionListener {
 	private static final int defaultWidth = 1200;
@@ -67,7 +64,6 @@ public class FinalScorecardPanel extends JFrame implements ActionListener {
         String[] playerScores = new String[players.length];
         for(int i = 0; i < players.length; i++) {
         	playerScores[i] = String.valueOf(players[i].playerCard.totalScore);
-        	System.out.println(playerScores[i]);
         }
         
         for(int i = 0; i < players.length; i++) {

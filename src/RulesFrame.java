@@ -1,11 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
-public class RulesFrame extends JFrame implements ActionListener{
+public class RulesFrame extends JFrame implements ActionListener {
 	
 	private JPanel rulesPanel = new JPanel(new CardLayout()); 
-	private JPanel[] rulesArray = new JPanel[5];
+	private JPanel[] rulesArray = new JPanel[6];
 	private int rulesIndex = 0;
 	private static final int defaultWidth = 1200;
     private static final int defaultHeight = 800;
@@ -20,11 +19,10 @@ public class RulesFrame extends JFrame implements ActionListener{
     private JPanel rulesPanel3 = createFourthRulesPanel();
     private JPanel rulesPanel4 = createFifthRulesPanel();
 
-    public RulesFrame() {
+    public RulesFrame(){
     	//define settings used for every rules panel
         setSize(defaultWidth, defaultHeight);
         this.setLayout(new BorderLayout());
-        
         formatMainButton();
         formatNextButton();
         formatPreviousButton();

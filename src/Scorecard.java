@@ -3,15 +3,13 @@
 * This class contains methods to score the upper half and the bonus scores and find the straights.
 * It calls functions to create panels to display the dice and the final scorecard.
 * CPSC 224-01, Spring 2018
-* Final Project
+* Final Project - Race Through Space
 * class Scorecard.java
 * @author Alana Dillinger
 * @version v1.0 5/4/2018
 */
 
 import java.util.Scanner;
-
-
 
 public class Scorecard {
   Scanner input = new Scanner(System.in);
@@ -26,7 +24,6 @@ public class Scorecard {
   boolean[] scored;
   boolean[] scoredThisTurn;
   Die[] dice;
-
 
   /**
   * Scorecard constructor stores an array of dice that contains the same dice
@@ -51,7 +48,8 @@ public class Scorecard {
   }
 
   /**
-  * Scores the planet part of the scorecard and tracks what has been scored in the boolean array hasBeenScored
+  * Scores the planet part of the scorecard and tracks what has been scored in the boolean array scored
+  * and a boolean array scoredThisTurn which is used to count straights
   */
   public void upperScoreCard(){	  
     // reset boolean array to false to check what has been scored this turn
@@ -140,32 +138,11 @@ public class Scorecard {
 
   /**
   * Score the bonus scores for each player
-  * Scores the small straight and large straight
+  * Scores the small straight and large straight after the maximum straight is counted
   */
-  public void bonusScores(){
-	  int maxStraight = 0;
-	  for(int i = 0; i < numberOfDice-2; i++){
-    	if(scoredThisTurn[i]){
-    		if(scoredThisTurn[i+1]){
-    			if(scoredThisTurn[i+2]){
-    				maxStraight = 3;
-    				break;
-    			}else{
-    				maxStraight = 2;
-    				break;
-    			}
-    		}else{
-    			maxStraight = 0;
-    		}
-    	 }
-      }
-	  // last case that isn't covered by the for loop so you don't leave the array bounds
-	  if(scoredThisTurn[5] && scoredThisTurn[6]){
-		  maxStraight = 2;
-	  }
-	  
+  public void bonusScores(){	  
     if(smallStraight == 0){
-    	if(maxStraight == 2 && !scored[8]){
+    	if(maxStraightFound() == 2 && !scored[8]){
         smallStraight = 30;
         scored[8] = true;
         totalScore = totalScore + 30;
@@ -173,7 +150,7 @@ public class Scorecard {
     }
 
     if(largeStraight == 0){
-    	if(maxStraight == 3 && !scored[9]){
+    	if(maxStraightFound() == 3 && !scored[9]){
         largeStraight = 50;
         scored[9] = true;
         totalScore = totalScore + 50;
@@ -186,18 +163,27 @@ public class Scorecard {
    * Checks the array of dice to find the longest straight that has been rolled
    * @return int maxStraight
    */
-    private int maxStraightFound(int maxStraight){
-      for(int i = 0; i < numberOfDice; i++){
-    	  System.out.println("maxStraight = " + maxStraight + scoredThisTurn[i]);
-        if(scoredThisTurn[i]){
-          maxStraight++;
+    private int maxStraightFound(){
+    	int maxStraight = 0;
+  	  for(int i = 0; i < numberOfDice-2; i++){
+      	if(scoredThisTurn[i]){
+      		if(scoredThisTurn[i+1]){
+      			if(scoredThisTurn[i+2]){
+      				maxStraight = 3;
+      				break;
+      			}else{
+      				maxStraight = 2;
+      				break;
+      			}
+      		}else{
+      			maxStraight = 0;
+      		}
+      	 }
         }
-        else
-        	if(maxStraight > 1){
-        		return maxStraight;
-        	}
-          maxStraight = 0;
-      }
+  	  // last case that isn't covered by the for loop so you don't leave the array bounds
+  	  if(scoredThisTurn[5] && scoredThisTurn[6]){
+  		  maxStraight = 2;
+  	  }
      return maxStraight;
     }
 

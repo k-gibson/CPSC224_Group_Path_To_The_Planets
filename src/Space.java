@@ -1,16 +1,23 @@
 /**
-* This program creates a new game of yahtzee and allows the user to play it.
+* Space.java is the main class that begins the entire game.
+* It creates a new instance of the game GUI which opens a window for the users to begin a game of Race Through Space.
 * CPSC 224-01, Spring 2018
-* Programming Assignment #6
-* Game.java
+* Final Project - Race Through Space
+* class Space.java
 * @author Alana Dillinger
-* @version v1.0 3/23/2018
+* @version v1.0 5/4/2018
 */
+
+import java.util.*;
+
+import javax.swing.JPanel;
 
 import java.io.*;
 
 public class Space{
-  // Creates and then lets the user play a game of yahtzee
+  /**
+  * Opens the first window of Race Through Space so users can begin a game
+  */
   public static void main(String[] args) throws FileNotFoundException{
 	gameGUI newGame = new gameGUI();
 	newGame.setTitle("Race Through Space");

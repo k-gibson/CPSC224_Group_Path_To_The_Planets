@@ -1,16 +1,16 @@
 /**
-* This class extends the Game class and uses and array of dice to simulate the game Yahtzee
-* This class contains methods to set up the game, play the game, take a turn, or score the game
-* Users are allowed to alter the configurations of the original version of Yahtzee.
-* Default game configurations are loaded from a "yahtzeeConfig.txt" file.
+* This class runs a game of Race Through Space with multiple players who all take multiple turns.
+* In a game, users play the game and score the game
 * CPSC 224-01, Spring 2018
-* Programming Assignment #6
-* class Yahtzee.java
-* @author Alana Dillinger and Kathrine Gibson
-* @version v1.0 3/23/2018
+* Final Project - Race Through Space
+* class Game.java
+* @author Alana Dillinger
+* @version v1.0 5/4/2018
 */
 
 import java.util.*;
+import javax.swing.JPanel;
+import java.io.*;
 
 public class Game extends Space{
   Scanner input = new Scanner(System.in);
@@ -21,7 +21,8 @@ public class Game extends Space{
   public int numberOfPlayers;
 
   /**
-  * Yahtzee constructor stores an array of dice used to play the game
+  * Game constructor creates an array of players and the number of players is defined by the user
+  * @param int numberOfPlayers inputted by the user
   */
   public Game(int numberOfPlayers){
     // Call get number of players panel class which returns numberOfPlayers
@@ -34,7 +35,9 @@ public class Game extends Space{
   }
 
   /**
-    * Begins a game of Yahtzee and at the end asks the user if they would like to play again
+    * Begins a game of Race Through Space.
+    * The game runs through seven rounds in which each player takes a turn and rolls the dice
+    * In a players turn, a roll panel is displayed that allows the player to interact with and roll the dice
     */
   public void playGame(){
 	  final int ROUNDS = 6;
@@ -62,7 +65,8 @@ public class Game extends Space{
   }
 
     /**
-      * Creates a new scoreboard which is used to score the game that was just played
+      * When either the players have run out of turns or someone has visited all the planets, the game ends.
+      * endGame finds the player who one and creates a winner screen to congratulate them.
       */
   private void endGame(){
     //hand need to be sorted to check for straights

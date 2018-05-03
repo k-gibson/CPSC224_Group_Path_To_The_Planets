@@ -1,10 +1,20 @@
+/**
+* Displays all of the rules in panels for the user to read
+* CPSC 224-01, Spring 2018
+* Final Project - Race Through Space
+* class RulesFrame.java
+* @author Kathrine Gibson
+* @version v1.0 5/4/2018
+*/
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-public class RulesFrame extends JFrame implements ActionListener {
+
+public class RulesFrame extends JFrame implements ActionListener{
 	
 	private JPanel rulesPanel = new JPanel(new CardLayout()); 
-	private JPanel[] rulesArray = new JPanel[6];
+	private JPanel[] rulesArray = new JPanel[5];
 	private int rulesIndex = 0;
 	private static final int defaultWidth = 1200;
     private static final int defaultHeight = 800;
@@ -19,10 +29,16 @@ public class RulesFrame extends JFrame implements ActionListener {
     private JPanel rulesPanel3 = createFourthRulesPanel();
     private JPanel rulesPanel4 = createFifthRulesPanel();
 
-    public RulesFrame(){
+    /**
+	  * Creates a new frame of the default size that the panels with the rules will be displayed on 
+	  * Calls methods to format all of the components
+	  * Adds the components to the frame and displays the frame on the screen
+	  */
+    public RulesFrame() {
     	//define settings used for every rules panel
         setSize(defaultWidth, defaultHeight);
         this.setLayout(new BorderLayout());
+        
         formatMainButton();
         formatNextButton();
         formatPreviousButton();
@@ -35,21 +51,36 @@ public class RulesFrame extends JFrame implements ActionListener {
         add(rulesPanel); 
     }
     
+    /**
+	  * Tells the program which rules panel is currently being displayed
+	  * @return JPanel currentPanel is the panel that the user is currently looking at
+	  */
     private JPanel getCurrentPanel() {
     	JPanel currentPanel = rulesArray[rulesIndex];
     	return currentPanel;
     }
     
+    /**
+	  * Tells the program which rules panel is next in the array of panels
+	  * @return JPanel nextPanel is the next panel in the array to be displayed
+	  */
     private JPanel getNextPanel() {
     	JPanel nextPanel = rulesArray[rulesIndex+1];
     	return nextPanel;
     }
     
+    /**
+	  * Tells the program which rules panel was shown before the current panel
+	  * @return JPanel previousPanel is the last panel in the array that was displayed
+	  */
     private JPanel getPreviousPanel() {
     	JPanel previousPanel = rulesArray[rulesIndex - 1];
     	return previousPanel;
     }
     
+    /**
+	  * Adds the next, previous, and main buttons to the panel when they are needed
+	  */
     private void addButtonPanels() {
     	JPanel mainButtonPanel = new JPanel();
         mainButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -69,6 +100,9 @@ public class RulesFrame extends JFrame implements ActionListener {
         previousButton.setVisible(false);
     }
     
+    /**
+	  * Formats the main button and add an ActionListener so the game reacts when the button is pressed
+	  */
     private void formatMainButton() {
     	mainButton.setOpaque(true);
         mainButton.setFont(new Font("Krungthep",Font.BOLD,25));
@@ -79,6 +113,9 @@ public class RulesFrame extends JFrame implements ActionListener {
         mainButton.addActionListener(this);
     }
     
+    /**
+	  * Formats the next button and add an ActionListener so the game reacts when the button is pressed
+	  */
     private void formatNextButton() {
     	nextButton.setOpaque(true);
         nextButton.setFont(new Font("Krungthep",Font.BOLD,30));
@@ -89,6 +126,9 @@ public class RulesFrame extends JFrame implements ActionListener {
         nextButton.addActionListener(this);
     }
     
+    /**
+	  * Formats the previous button and add an ActionListener so the game reacts when the button is pressed
+	  */
     private void formatPreviousButton() {
     	previousButton.setOpaque(true);
         previousButton.setFont(new Font("Krungthep",Font.BOLD,30));
@@ -99,6 +139,10 @@ public class RulesFrame extends JFrame implements ActionListener {
         previousButton.addActionListener(this);
     }
     
+    /**
+	  * When one of the buttons is pressed, the ActionListener will react by closing the rules panel,
+	  * going to the next rules panel, or returning to the previous rules panel
+	  */
     public void actionPerformed(ActionEvent e)
     {
         
@@ -133,6 +177,10 @@ public class RulesFrame extends JFrame implements ActionListener {
     	}
     }
 
+    /**
+	  * Formats the rules panel with the "Rules" title and set the text font, size, and color
+	  * @return JPanel returnPanel is the completely formatted panel to be displayed
+	  */
     private JPanel createRulesPanel() {
     	JPanel returnPanel = new JPanel();
     	returnPanel.setLayout(new BoxLayout(returnPanel, BoxLayout.PAGE_AXIS));
@@ -151,6 +199,9 @@ public class RulesFrame extends JFrame implements ActionListener {
         return returnPanel; 
     }
     
+    /**
+	  * Fills the rulesArray with new rules panels
+	  */
     private void initializeRulesArray() {
     	rulesArray[0] = rulesPanel0;
         rulesArray[1] = rulesPanel1;
@@ -159,7 +210,10 @@ public class RulesFrame extends JFrame implements ActionListener {
         rulesArray[4] = rulesPanel4;
     }
     
-    
+    /**
+	  * Formats the first rules panel with part of the rules
+	  * @return JPanel rulesPanel0 is the first rules panel to be displayed
+	  */
     private JPanel createFirstRulesPanel() {
     	JPanel rulesPanel0 = new JPanel();
     	rulesPanel0.setBackground(new java.awt.Color(40,23,35));
@@ -187,6 +241,10 @@ public class RulesFrame extends JFrame implements ActionListener {
         return rulesPanel0;
     }
 
+    /**
+	  * Formats the second rules panel with part of the rules
+	  * @return JPanel rulesPanel1 is the second rules panel to be displayed
+	  */
     private JPanel createSecondRulesPanel() {
     	JPanel rulesPanel1 = new JPanel();
     	rulesPanel1.setBackground(new java.awt.Color(40,23,35));
@@ -251,6 +309,10 @@ public class RulesFrame extends JFrame implements ActionListener {
         return rulesPanel1;
     }
     
+    /**
+	  * Formats the third rules panel with part of the rules
+	  * @return JPanel rulesPanel2 is the third rules panel to be displayed
+	  */
     private JPanel createThirdRulesPanel() {
     	JPanel rulesPanel2 = new JPanel();
     	rulesPanel2.setBackground(new java.awt.Color(40,23,35));
@@ -289,6 +351,10 @@ public class RulesFrame extends JFrame implements ActionListener {
         return rulesPanel2;
     }
 
+    /**
+	  * Formats the fourth rules panel with part of the rules
+	  * @return JPanel rulesPanel3 is the fourth rules panel to be displayed
+	  */
     private JPanel createFourthRulesPanel() {
     	JPanel rulesPanel3 = new JPanel();
     	rulesPanel3.setBackground(new java.awt.Color(40,23,35));
@@ -347,6 +413,10 @@ public class RulesFrame extends JFrame implements ActionListener {
         return rulesPanel3;
     }
 
+    /**
+	  * Formats the fifth rules panel with part of the rules
+	  * @return JPanel rulesPanel4 is the fifth rules panel to be displayed
+	  */
     private JPanel createFifthRulesPanel() {
     	JPanel rulesPanel4 = new JPanel();
     	rulesPanel4.setBackground(new java.awt.Color(40,23,35));

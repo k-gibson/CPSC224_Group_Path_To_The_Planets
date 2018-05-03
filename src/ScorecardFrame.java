@@ -1,18 +1,33 @@
+/**
+* Displays the players current scorecard with all of their scores after each time they roll the dice
+* CPSC 224-01, Spring 2018
+* Final Project - Race Through Space
+* class ScorecardFrame.java
+* @author Alana Dillinger
+* @version v1.0 5/4/2018
+*/
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
-
 import java.awt.*;
 import java.awt.event.*;
-
-
 
 public class ScorecardFrame extends JFrame implements ActionListener {
 	private static final int defaultWidth = 1200;
     private static final int defaultHeight = 800;
+    private static final int scoreLineHeight = defaultHeight/15;
     
     private JButton nextButton = new JButton("Done");
     private JPanel cardPanel = new JPanel();
     
+    /**
+	  * Scorecard constructor calls methods to format all components and adds the components to the screen
+	  * @param int[] upperCardScores are the planets they have visited corresponding scores
+	  * @param int smallStraight is the players smallStraight score
+	  * @param int largeStraight is the players largeStraight score
+	  * @param int triForce is the players triForce score
+	  * @param int totalScore is the players total score
+	  */
     public ScorecardFrame(int[] upperCardScores, int smallStraight, int largeStraight, int triForce, int totalScore) {
     	setSize(defaultWidth, defaultHeight);
     	this.setLayout(new BorderLayout());
@@ -24,6 +39,9 @@ public class ScorecardFrame extends JFrame implements ActionListener {
     	add(cardPanel);
     }
     
+    /**
+	  * Adds the 'continue button to the top of the panel
+	  */
     private void addButton() {
     	JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -32,6 +50,9 @@ public class ScorecardFrame extends JFrame implements ActionListener {
         this.add(buttonPanel,BorderLayout.NORTH);
     }
     
+    /**
+	  * Formats the 'continue' button
+	  */
     private void formatNextButton() {
     	nextButton.setOpaque(true);
         nextButton.setFont(new Font("Krungthep",Font.BOLD,20));
@@ -42,6 +63,14 @@ public class ScorecardFrame extends JFrame implements ActionListener {
         nextButton.addActionListener(this);
     }
     
+    /**
+	  * Formats the card panel that is going to be displayed with all of the players scores in a JTable after they have rolled the dice on their current turn
+	  * @param int[] upperCardScores are the planets they have visited corresponding scores
+	  * @param int smallStraight is the players smallStraight score
+	  * @param int largeStraight is the players largeStraight score
+	  * @param int triForce is the players triForce score
+	  * @param int totalScore is the players total score
+	  */
     private JPanel createCardPanel(int[] upperCardScores, int smallStraight, int largeStraight, int triForce, int totalScore) {
     	JPanel returnPanel = new JPanel();
     	returnPanel.setLayout(new BoxLayout(returnPanel, BoxLayout.PAGE_AXIS));
@@ -64,6 +93,7 @@ public class ScorecardFrame extends JFrame implements ActionListener {
         String[] stringScores = new String[upperCardScores.length];
         for(int i=0; i < upperCardScores.length; i++) {
         	stringScores[i] = String.valueOf(upperCardScores[i]);
+        	System.out.println(upperCardScores.length);
         }
         //planet labels
         JPanel scoresPanel = new JPanel();
@@ -113,12 +143,16 @@ public class ScorecardFrame extends JFrame implements ActionListener {
         table.setRowHeight(10,rowHeight);
         table.setRowHeight(11,rowHeight);
         
+        
         scoresPanel.add(table);
         returnPanel.add(scoresPanel,BorderLayout.NORTH);
         returnPanel.setOpaque(true);
         return returnPanel; 
     }
     
+    /**
+	  * When the done button is pressed, the scorecard goes away
+	  */
     public void actionPerformed(ActionEvent e)
     { 
     	this.setVisible(false);

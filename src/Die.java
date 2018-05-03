@@ -1,12 +1,11 @@
 /**
-* This class stores the face value of a dice to use playing Yahtzee.
-* It contains the methods to roll the dice, get the value of the die
-* and set a new value to the die for sorting the array of dice
+* This class stores the face value of a dice to use playing Race Through Space.
+* It contains the methods to roll the dice, and get the face value of the die
 * CPSC 224-01, Spring 2018
-* Programming Assignment #6
-* class Dice.java
+* Final Project - Race Through Space
+* class Die.java
 * @author Alana Dillinger
-* @version v1.0 3/23/2018
+* @version v1.0 5/4/2018
 */
 
 import java.util.*;
@@ -18,15 +17,17 @@ public class Die{
   private Random rand;
 
   /**
-  * Die constructor stores an integer value and a variable rand to generate random numbers
-  * Die is used and called by Yahtzee
+  * Die constructor stores an enumerated type Planet which stored the current face value of the die
+  * and and Random object used for rolling the die
   */
   public Die() {
+    Planet planet;
     rand = new Random();
   }
 
   /**
   * "Rolls the die" or assigns a random integer between 1 and 6 to the die's value
+  * Converts that integer to the corresponding planet
   */
   public void roll(int numberOfSides) {
     int value = rand.nextInt(numberOfSides);

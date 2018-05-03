@@ -1,6 +1,15 @@
+/**
+* Displays the dice rolled on the screen
+* Tells the user what planets they have traveled to and the bonuses scored
+* CPSC 224-01, Spring 2018
+* Final Project - Race Through Space
+* class RolledDiePanel.java
+* @author Parker Mooseker
+* @version v1.0 5/4/2018
+*/
+
 import javax.swing.*;
 import javax.swing.Box.*;
-
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,7 +31,12 @@ public class RolledDiePanel extends JPanel {
 	private ArrayList<String> travelLabel = new ArrayList<String>();
 	private String dieName = "";
 
-
+	/**
+  	* RolledDie constructor calls the method to set up the panel and displays it on the screen
+ 	* @param Player player is the single player who rolled 
+	* @param int numberOfTurns is the number of turn the player is on
+	* @throws IOException is the planet images aren't found
+  	*/
 	public RolledDiePanel(Player player, int numberOfTurns) throws IOException {
 		try {
 			thisPlayer = player;
@@ -36,6 +50,11 @@ public class RolledDiePanel extends JPanel {
 		}
 	}
 
+	/**
+	  * Sets up the panel with the dice images in a grid layout
+	  * with labels that tell the user what they have scored in this roll
+	  * @throws IOException if the planet images are not found
+	  */
 	private void setUpPanel() throws IOException {
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.setBackground(Color.black);
@@ -54,12 +73,18 @@ public class RolledDiePanel extends JPanel {
 		this.add(wordsPanel);
 	}
 
-
+	/**
+	  * Loads the planet images in an array depending on the planet that was rolled on the die at the corresponding index
+	  * @throws IOException if the planet images are not found
+	  */
 	private void loadPlanetImages() throws IOException {
 		addDieLabels();
 		
 		for (int i = 0; i < 7; i++) {
-			int playerHandVal = 0;	
+			
+			int playerHandVal = 0;
+			
+					
 			switch (thisPlayer.getHandValue(i)){
 			case ("MERCURY") : { playerHandVal = 0;
 				break;}
@@ -91,6 +116,10 @@ public class RolledDiePanel extends JPanel {
 		mainPanel.setVisible(true);	
 	}
 
+	/**
+	  * Adds planet labels to the dice to tell the user which die is which
+	  * sets the font, text size, and text color for the labels
+	  */
 	private void addDieLabels(){
 			for(int i = 0; i <7 ; i++){
 				dieLabels[i] = new JLabel(dieNames[i] + " DIE:");
@@ -103,15 +132,22 @@ public class RolledDiePanel extends JPanel {
 			}
 		}
 	
+	/**
+	  * Gets the face value of the dice rolled to set the dice picture to be displayed
+	  * @param int index of the die whose face value is being checked
+	  */
 	public void setTravelValue(int index){
 		if(thisPlayer.getHandValue(index)== dieNames[index]){
 			dieName = dieNames[index];
-			travelLabel.add(dieName);
+			travelLabel.add(dieName);			
 		}
 	}
 	
+	/**
+	  * Adds labels on the screen to tell the player which planets they have traveled to
+	  */
 	private void addTravelLabel(){	
-		JLabel travelLabelx = new JLabel("You May Travel To: ");
+		JLabel travelLabelx = new JLabel("You Traveled To: ");
 		
 		travelLabelx.setFont(new Font("Krungthep", 1, 25));
 		travelLabelx.setForeground(Color.white);
@@ -127,10 +163,10 @@ public class RolledDiePanel extends JPanel {
 			JLabel p = new JLabel(s);
 			p.setFont(new Font("Krungthep", 1, 25));
 			p.setForeground(Color.white);
+			
 			wordsPanel.add(p);
 			wordsPanel.setVisible(true);
 		}
 		}
-	}
-		
+	}	
 }

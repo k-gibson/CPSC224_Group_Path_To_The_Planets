@@ -1,6 +1,15 @@
+/**
+* Creates the main panel of the Race Through Space game buttons for the player to begin a game or read the rules
+* Loads the star background image and places title labels and buttons on top.
+* CPSC 224-01, Spring 2018
+* Final Project - Race Through Space
+* class gameGUI.java
+* @author Kathrine Gibson
+* @version v1.0 5/4/2018
+*/
+
 import javax.swing.*;
 import javax.swing.Box.*;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -16,6 +25,10 @@ public class gameGUI extends JFrame{
     private static final int defaultWidth = 1200;
     private static final int defaultHeight = 800;
 	
+    /**
+	  * Sets up the main panel of the game with the default size
+	  * Calls methods to add everything that's needed to the main panel
+	  */
 	public gameGUI() {
 		setSize(defaultWidth, defaultHeight);
 		finalPanel.setPreferredSize(new Dimension(defaultWidth,defaultHeight));
@@ -25,6 +38,9 @@ public class gameGUI extends JFrame{
 		createBackgroundImage(); 
 	}
 	
+	/**
+	  * Formats the play button and add an ActionListener so the game reacts when the button is pressed
+	  */
 	private void formatPlayButton() {
 		playButton.setOpaque(true);
         playButton.setFont(new Font("Krungthep",Font.BOLD,60));
@@ -48,6 +64,9 @@ public class gameGUI extends JFrame{
 	      });
 	}
 	
+	/**
+	  * Formats the rules button and add an ActionListener so the game reacts when the button is pressed
+	  */
 	private void formatRulesButton() {
 		
 		rulesButton.setOpaque(true);
@@ -58,7 +77,6 @@ public class gameGUI extends JFrame{
         rulesButton.setBorderPainted(false);
         rulesButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         
-        
         rulesButton.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	        	 RulesFrame rules = new RulesFrame();
@@ -68,6 +86,11 @@ public class gameGUI extends JFrame{
 	      });
 	}
 	
+	/**
+	  * Creates the main panel that is going to be displayed.
+	  * Added the buttons, labels, and background image to display on the screen to the user
+	  * Sets the font, text size, and text color for the labels
+	  */
 	private void createMainPanel() {
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 		mainPanel.setBackground(new java.awt.Color(40,23,35));
@@ -110,7 +133,9 @@ public class gameGUI extends JFrame{
 	  	
 	  	finalPanel.add(mainPanel, JLayeredPane.PALETTE_LAYER);
 	}
-
+	/**
+	  * Finds the space image in the component folder and sets this image as the main panels background
+	  */
 	private void createBackgroundImage() {
 		try {
 			spaceImage = new SpaceImage(8);
